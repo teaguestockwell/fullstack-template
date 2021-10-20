@@ -1,34 +1,106 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![MIT License][license-shield]][license-URL]
+[![LinkedIn][linkedin-shield]][linkedin-URL]
+
+[license-shield]: https://img.shields.io/github/license/tsAppDevelopment/hello2.svg
+[license-URL]: https://github.com/tsAppDevelopment/fullstack-template/blob/master/licence.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
+[linkedin-URL]: https://www.linkedin.com/in/teague-stockwell/
+
+<br />
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/71202372/138011873-47e9b176-c06f-4931-9fe6-2b392e3d8e68.png" alt="Logo" width="500vh">
+
+  <h3 align="center">Fullstack Template</h3>
+
+  <p align="center">
+    Jump Start your jam stack with some of my favorite tools
+    <br />
+    <!-- <a href="">View Live</a> -->
+    <a href="https://github.com/tsAppDevelopment/fullstack-template/issues">Report Bug</a>
+  </p>
+</p>
+
+<br />
+
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#system-architecture">System Architecture</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#deployment">Deployment</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+</details>
+
+<br/>
+
+## About The Project
+
+This is an opinionated starting point for common patterns and tools I have used building jam stack sites with Postgres, Next.js, React, and Node.js.
+
+### Serverless Connection Pooling
+Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution is using AWS RDS Proxy to pool connections on postgres. Unfortunately, because of the way RDS proxy pins connections it cant be used with [prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Another way may be to roll a custom PgBouncer on an EC2 instance. I ended up switching to Digital Ocean because they offered a managed PostgreSQL with PgBouncer. Another thing to keep an eye on in the future is [prisma's data proxy](https://www.prisma.io/docs/concepts/components/prisma-data-platform#data-proxy) as a managed connection pool and ORM as a service that can reduce lambda cold start times by offloading part of the ORM.
+### Presigned Image Uploads
+When a client want to upload an image, a request is sent to the API to return a presigned upload URL. Before the API returns the URL, it can make sure the user is signed in and that they have not exceeded their rate limit. In the future, rate limiting would be handled by Redis, but for now it lives in a DB table. Once the client receives the upload URL any they input an image, it gets compressed in the browser using [browser-image-compression](https://www.npmjs.com/package/browser-image-compression) until it is within the upload limit. When the image is submitted to the API, the API sends a HEAD req to verify the upload was successful. It can then save the image and remove the Pic job it created when issuing the presigned URL to track stale objects that may be in S3.
+
+### Incremental Static Generation & React Query
+Next.js can generate static HTML incrementally into it's edge network cache. When that page is served to the client, the next data is passed to react-query as as initial data. From there react-query can take over and do some powerful things like refetch on window focus and optimistic updates for mutations.
+
+### Authentication
+Next Auth and Google OAuth are used to authenticate users. From there the API can determine what roles a user has.
+
+## System Architecture
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71202372/138023693-ed273c9a-a80f-4bd3-80f1-3764d036921c.png" alt="system architecture" width="1000vh" >
+</p>
+
+## Built With
+### Language and Framework
+- [Create Next App](https://nextjs.org/docs/api-reference/create-next-app)
+- [TypeScript](https://www.typescriptlang.org)
+### Serverless API
+- [Next.js API Routes](https://nextjs.org/learn/basics/API-routes)
+- [Custom API middleware handler](https://github.com/tsAppDevelopment/buildable/blob/main/src/middleware/init_middleware.ts)
+### Database ORM
+- [prisma](https://www.prisma.io/docs/)
+### Object Storage
+- S3
+- [Presigned URLs](https://github.com/leerob/nextjs-aws-s3)
+### State 
+- Global state management with [zustand](https://github.com/pmndrs/zustand)
+- Server state management with [react-query](https://react-query.tanstack.com/overview)
+### JWT Authentication
+- Plugin for OAuth providers [next-auth](https://next-auth.js.org/getting-started/introduction)
+- [Google Oauth](https://developers.google.com/identity/protocols/oauth2)
+### Styling
+- CSS in JS with [emotion](https://emotion.sh/docs/ssr)
+- Dark and light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
+### Static and Runtime Caching
+- Service worker generated using workbox and [next-pwa](https://github.com/shadowwalker/next-pwa)
+### SEO 
+- Meta tags / Open Graph generated using [next-auth](https://github.com/garmeeh/next-seo)
+- Favorite icons generated with [RealFaviconGenerator](https://realfavicongenerator.net)
+
+### Testing
+- Unit tests [jest](https://jestjs.io/docs/getting-started)
+- Component tests [testing-library](https://testing-library.com/docs/)
+- E2E tests [cypress](https://docs.cypress.io/API/table-of-contents)
 
 ## Getting Started
+...
+## Deployment
+...
+## Roadmap
 
-First, run the development server:
+See the [open issues](https://github.com/tsappdevelopment/fullstack-template/issues) for a list of proposed features (and known issues).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## License
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contact
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Teague Stockwell - [LinkedIn](https://www.linkedin.com/in/teague-stockwell)
