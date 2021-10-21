@@ -1,9 +1,12 @@
-import { Example } from "../components/exampe";
+import {Example} from '../components/exampe'
 
 const Page = () => {
-  const one: Types.Example.Type1 = { foo: "hello", bar: "world" };
+  const one: Types.Example.Type1 = {
+    foo: 'hello',
+    bar: 'world',
+  }
 
-  return <Example one={one} />;
-};
+  return <Example one={one} />
+}
 
-export default Page;
+export default Page
