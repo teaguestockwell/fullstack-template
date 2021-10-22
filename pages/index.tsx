@@ -1,12 +1,7 @@
-import {Example} from '../components/exampe'
+import {Example} from '../components/example/example'
 
 const Page = () => {
-  const one: Types.Example.Type1 = {
-    foo: 'hello',
-    bar: 'world',
-  }
-
-  return <Example one={one} />
+  return <Example />
 }
 
 export default Page
