@@ -13,4 +13,4 @@ export const getPost = async (id: string) => {
   }
 }
 
-export type ReadDeep = Awaited<Types.Util.ReturnType<typeof getPost>>
+export type ReadDeep = {id: string; title: string; body: string}

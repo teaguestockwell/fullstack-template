@@ -15,10 +15,16 @@ const Counter = () => {
 
   return (
     <>
-      <button onClick={() => useStore.setState({count: s.count + 1})}>
+      <button
+        style={{display: 'flex'}}
+        onClick={() => useStore.setState({count: s.count + 1})}
+      >
         Inc
       </button>
-      <button onClick={() => useStore.setState({count: s.count - 1})}>
+      <button
+        style={{display: 'flex'}}
+        onClick={() => useStore.setState({count: s.count - 1})}
+      >
         Dec
       </button>
     </>

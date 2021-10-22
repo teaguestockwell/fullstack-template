@@ -8,6 +8,7 @@
     "start": "next build && next start -p 8080",
     "lint": "next lint",
     "prepare": "husky install",
+    "analyze": "ANALYZE=true npm run build",
     "test": "jest",
     "test:coverage": "jest --coverage && open ./coverage/lcov-report/index.html",
     "test:e2e": "next build && concurrently --kill-others \"next start -p 8081\" \"wait-on http://localhost:8081 && cypress run --env CYPRESS_BASE_URL=http://localhost:8081\"",
@@ -31,6 +32,9 @@
     "zustand": "^3.6.0"
   },
   "devDependencies": {
+    "next-pwa": "^5.4.0",
+    "@next/bundle-analyzer": "^11.1.2",
+    "next-compose-plugins": "^2.2.1",
     "@emotion/babel-plugin": "^11.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",

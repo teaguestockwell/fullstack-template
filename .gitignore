@@ -32,3 +32,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# there is no need to version control these, because they are generated at build time
+/public/sw.js
+/public/workbox**
