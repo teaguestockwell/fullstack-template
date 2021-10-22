@@ -6,7 +6,4 @@ it('renders', () => {
   expect(
     screen.getByText('example hover and focus inline styles')
   ).toBeInTheDocument()
-  expect(
-    screen.getByText('example uppercase when media query is lg')
-  ).toBeInTheDocument()
 })

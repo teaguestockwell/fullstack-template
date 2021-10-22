@@ -28,7 +28,8 @@
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
     <li><a href="#built-with">Built With</a></li>
-    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#getting-started">Testing</a></li>
     <li><a href="#deployment">Deployment</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
@@ -116,7 +117,46 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 ## Getting Started
 
-...
+Follow these easy steps to get started locally
+
+- fork the repo
+- clone the fork
+- cd into the directory
+- install dependencies
+
+```sh
+npm i
+```
+
+- run the server
+
+```sh
+npm run start
+```
+
+## Testing
+
+Unit and component tests are run with jests a test-library to get started run:
+
+```sh
+npm run test
+```
+
+e2e tests are run with cypress to get started run:
+
+```sh
+npm run test:e2e
+```
+
+Both of these commands can be ran with hot reload.
+
+```sh
+npm run test:e2e:watch
+```
+
+```sh
+npm run test:watch
+```
 
 ## Deployment
 
@@ -124,7 +164,6 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 - edit your site.webmanifest to include match ./public/site.webmanifest
 - Add your open graph img into the public folder as og-1200-630.png
 - edit const.ts to include your constants like domain, title and description
--
 
 ## Roadmap
 
