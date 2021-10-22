@@ -1,10 +1,10 @@
-[![MIT License][license-shield]][license-URL]
-[![LinkedIn][linkedin-shield]][linkedin-URL]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 [license-shield]: https://img.shields.io/github/license/tsAppDevelopment/hello2.svg
-[license-URL]: https://github.com/tsAppDevelopment/fullstack-template/blob/master/licence.txt
+[license-url]: https://github.com/tsAppDevelopment/fullstack-template/blob/master/licence.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
-[linkedin-URL]: https://www.linkedin.com/in/teague-stockwell/
+[linkedin-url]: https://www.linkedin.com/in/teague-stockwell/
 
 <br />
 
@@ -42,57 +42,90 @@
 This is an opinionated starting point for common patterns and tools I have used building jam stack sites with Postgres, Next.js, React, and Node.js.
 
 ### Serverless Connection Pooling
+
 Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution is using AWS RDS Proxy to pool connections on postgres. Unfortunately, because of the way RDS proxy pins connections it cant be used with [prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Another way may be to roll a custom PgBouncer on an EC2 instance. I ended up switching to Digital Ocean because they offered a managed PostgreSQL with PgBouncer. Another thing to keep an eye on in the future is [prisma's data proxy](https://www.prisma.io/docs/concepts/components/prisma-data-platform#data-proxy) as a managed connection pool and ORM as a service that can reduce lambda cold start times by offloading part of the ORM.
+
 ### Presigned Image Uploads
+
 When a client want to upload an image, a request is sent to the API to return a presigned upload URL. Before the API returns the URL, it can make sure the user is signed in and that they have not exceeded their rate limit. In the future, rate limiting would be handled by Redis, but for now it lives in a DB table. Once the client receives the upload URL any they input an image, it gets compressed in the browser using [browser-image-compression](https://www.npmjs.com/package/browser-image-compression) until it is within the upload limit. When the image is submitted to the API, the API sends a HEAD req to verify the upload was successful. It can then save the image and remove the Pic job it created when issuing the presigned URL to track stale objects that may be in S3.
 
 ### Incremental Static Generation & React Query
+
 Next.js can generate static HTML incrementally into it's edge network cache. When that page is served to the client, the next data is passed to react-query as as initial data. From there react-query can take over and do some powerful things like refetch on window focus and optimistic updates for mutations.
 
 ### Authentication
+
 Next Auth and Google OAuth are used to authenticate users. From there the API can determine what roles a user has.
 
 ## System Architecture
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/71202372/138023693-ed273c9a-a80f-4bd3-80f1-3764d036921c.png" alt="system architecture" width="1000vh" >
 </p>
 
 ## Built With
+
 ### Language and Framework
+
 - [Create Next App](https://nextjs.org/docs/api-reference/create-next-app)
 - [TypeScript](https://www.typescriptlang.org)
+
 ### Serverless API
+
 - [Next.js API Routes](https://nextjs.org/learn/basics/API-routes)
 - [Custom API middleware handler](https://github.com/tsAppDevelopment/buildable/blob/main/src/middleware/init_middleware.ts)
+
 ### Database ORM
+
 - [prisma](https://www.prisma.io/docs/)
+
 ### Object Storage
+
 - S3
 - [Presigned URLs](https://github.com/leerob/nextjs-aws-s3)
-### State 
+
+### State
+
 - Global state management with [zustand](https://github.com/pmndrs/zustand)
 - Server state management with [react-query](https://react-query.tanstack.com/overview)
+
 ### JWT Authentication
+
 - Plugin for OAuth providers [next-auth](https://next-auth.js.org/getting-started/introduction)
 - [Google Oauth](https://developers.google.com/identity/protocols/oauth2)
+
 ### Styling
+
 - CSS in JS with [emotion](https://emotion.sh/docs/ssr)
 - Dark and light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
+
 ### Static and Runtime Caching
+
 - Service worker generated using workbox and [next-pwa](https://github.com/shadowwalker/next-pwa)
-### SEO 
+
+### SEO
+
 - Meta tags / Open Graph generated using [next-auth](https://github.com/garmeeh/next-seo)
 - Favorite icons generated with [RealFaviconGenerator](https://realfavicongenerator.net)
 
 ### Testing
+
 - Unit tests [jest](https://jestjs.io/docs/getting-started)
 - Component tests [testing-library](https://testing-library.com/docs/)
 - E2E tests [cypress](https://docs.cypress.io/API/table-of-contents)
 
 ## Getting Started
+
 ...
+
 ## Deployment
-...
+
+- Generate your fav icon package and add the contents to the public folder
+- edit your site.webmanifest to include match ./public/site.webmanifest
+- Add your open graph img into the public folder as og-1200-630.png
+- edit const.ts to include your constants like domain, title and description
+-
+
 ## Roadmap
 
 See the [open issues](https://github.com/tsappdevelopment/fullstack-template/issues) for a list of proposed features (and known issues).

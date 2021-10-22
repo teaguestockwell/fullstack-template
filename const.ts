@@ -1,5 +1,9 @@
 export const domain = ''
 
+export const title = 'Fullstack Template'
+
+export const description = 'Fullstack Template'
+
 export const cssVars = {
   contentPad: 'var(--content-pad)',
   cardRad: 'var(--card-rad)',
