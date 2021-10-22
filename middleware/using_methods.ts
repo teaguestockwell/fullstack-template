@@ -1,7 +1,7 @@
 import {ApiError} from './using_middleware'
 
 // if the request method is not supported, throw an error to return a 405
-export const usingMethod = async (
+export const usingMethods = async (
   req: Types.Next.NextApiRequest,
   allowedMethods: string[] | undefined = ['PUT', 'DELETE', 'GET']
 ): Promise<string> => {

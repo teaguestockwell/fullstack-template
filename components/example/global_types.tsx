@@ -1,7 +1,8 @@
 export const GlobalTypes = ({one}: {one: Types.Example.Type1}) => {
   return (
-    <p>
-      example of global types: {one.foo} {one.bar}
-    </p>
+    <div>
+      <p>example of global types</p>
+      <p>{`${one.foo} ${one.bar}`}</p>
+    </div>
   )
 }

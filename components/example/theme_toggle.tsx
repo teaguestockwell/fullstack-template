@@ -19,7 +19,12 @@ export const ThemeToggle = ({
   }
 
   return (
-    <button css={outerCss} onClick={toggleTheme} aria-label="toggle theme">
+    <button
+      data-testid={`toggle-${theme}`}
+      css={outerCss}
+      onClick={toggleTheme}
+      aria-label="toggle theme"
+    >
       {theme === 'light' ? <Dark {...iconProps} /> : <Light {...iconProps} />}
     </button>
   )

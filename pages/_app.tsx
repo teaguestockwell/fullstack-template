@@ -1,5 +1,5 @@
 import type {AppProps} from 'next/app'
-import {ThemeProvider} from 'next-themes'
+import {Providers} from '../components/providers'
 import {domain, title, description} from '../const'
 import {DefaultSeo} from 'next-seo'
 import Head from 'next/head'
@@ -45,9 +45,9 @@ export default function App({Component, pageProps}: AppProps & PageProps) {
         <title>{Component.title ? Component.title : title}</title>
       </Head>
 
-      <ThemeProvider>
+      <Providers>
         <Component {...pageProps} />
-      </ThemeProvider>
+      </Providers>
     </>
   )
 }

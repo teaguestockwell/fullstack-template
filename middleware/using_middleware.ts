@@ -21,10 +21,12 @@ export const usingMiddleware = async (
 ) => {
   await handler().catch((e) => {
     if (e.name === 'ApiError') {
-      res.status(e.status).send(e.body)
+      res.status(e.status)
+      res.json(e.body)
     } else {
-      console.trace(e)
-      res.status(500).send('server error')
+      console.error('caught error', e)
+      res.status(500)
+      res.json({msg: 'server error'})
     }
   })
 }
