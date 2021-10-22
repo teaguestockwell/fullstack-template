@@ -17,16 +17,14 @@ export class ApiError extends Error {
 export const usingMiddleware = async (
   _req: Types.Next.NextApiRequest,
   res: Types.Next.NextApiResponse,
-  func: () => Promise<void>
+  handler: () => Promise<void>
 ) => {
-  await func().catch((e) => {
-    if (e.name !== 'ApiError') {
+  await handler().catch((e) => {
+    if (e.name === 'ApiError') {
+      res.status(e.status).send(e.body)
+    } else {
       console.trace(e)
       res.status(500).send('server error')
-      return
     }
-
-    console.info(`caught error: ${e.status} ${e.body}`)
-    res.status(e.status).send(e.body)
   })
 }

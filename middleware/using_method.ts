@@ -10,7 +10,7 @@ export const usingMethod = async (
   if (!method || !allowedMethods.includes(method)) {
     throw new ApiError({
       status: 405,
-      body: `supported method(s): ${allowedMethods.join(', ')}`,
+      body: {msg: `supported method(s): ${allowedMethods.join(', ')}`},
     })
   }
 
