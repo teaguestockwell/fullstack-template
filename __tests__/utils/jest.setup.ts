@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/extend-expect'
 import MatchMediaMock from 'jest-matchmedia-mock'
 jest.setTimeout(100000)
+import {server} from './msw'
 
 let matchMedia
 
@@ -17,8 +18,13 @@ beforeAll(() => {
   })
 
   global.Storage.prototype.getItem = jest.fn((key) => store[key])
+
+  server.listen()
 })
 
 afterEach(() => {
   jest.clearAllMocks()
+  server.resetHandlers()
 })
+
+afterAll(() => server.close())
