@@ -31,6 +31,7 @@
     <li><a href="#testing">Testing</a></li>
     <li><a href="#getting-started">Testing</a></li>
     <li><a href="#deployment">Deployment</a></li>
+    <li><a href="#how-to-run">How to run</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -180,6 +181,20 @@ npm run test:watch
 - edit your site.webmanifest to include match ./public/site.webmanifest
 - Add your open graph img into the public folder as og-1200-630.png
 - edit const.ts to include your constants like domain, title and description
+
+## How to Run
+
+To build and run the app locally with docker run:
+
+```sh
+npm run docker:build
+```
+
+```sh
+npm run docker:up
+```
+
+The app will be available on: http://localhost:8080
 
 ## Roadmap
 

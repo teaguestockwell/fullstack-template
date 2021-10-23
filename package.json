@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next build && next start -p 8080",
     "lint": "next lint",
     "prepare": "husky install",
@@ -17,7 +17,11 @@
     "docker:db:migrate": "docker run --name migration --rm -d -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=db -p 3306:3306 mysql && sleep 15 && prisma migrate dev && docker kill migration",
     "docker:db:up": "docker run --name dev-db --rm -d -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=db -p 3306:3306 mysql && sleep 15 && prisma db push --force-reset --accept-data-loss",
     "studio": "prisma studio",
-    "reset:db": "prisma db push --force-reset"
+    "reset:db": "prisma db push --force-reset",
+    "docker:build": "docker-compose -f prod_compose.yml -p FS-Template build --parallel",
+    "docker:up": "docker-compose -f prod_compose.yml -p Fs-Template up --force-recreate",
+    "docker:prune": "docker system prune -f",
+    "docker:entrypoint": "node -e \"(() => {setTimeout(() => {}, 15000)})()\" && prisma migrate deploy && next start -p 8080"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",

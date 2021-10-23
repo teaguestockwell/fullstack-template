@@ -28,6 +28,6 @@
     "downlevelIteration": true,
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["types/next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["types/next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/client.ts"],
   "exclude": ["node_modules", "cypress"]
 }
