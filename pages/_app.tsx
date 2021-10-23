@@ -2,6 +2,7 @@ import type {AppProps} from 'next/app'
 import {Providers} from '../components/providers'
 import {domain, title, description} from '../const'
 import {DefaultSeo} from 'next-seo'
+import {WithClientAuth} from '../hooks/with_client_auth'
 import Head from 'next/head'
 import '../global_styles/global_styles.css'
 
@@ -45,8 +46,14 @@ export default function App({Component, pageProps}: AppProps & PageProps) {
         <title>{Component.title ? Component.title : title}</title>
       </Head>
 
-      <Providers>
-        <Component {...pageProps} />
+      <Providers pageProps={pageProps}>
+        {Component.auth ? (
+          <WithClientAuth>
+            <Component {...pageProps} />
+          </WithClientAuth>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </Providers>
     </>
   )

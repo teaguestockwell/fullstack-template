@@ -180,7 +180,28 @@ npm run test:watch
 - Generate your fav icon package and add the contents to the public folder
 - edit your site.webmanifest to include match ./public/site.webmanifest
 - Add your open graph img into the public folder as og-1200-630.png
-- edit const.ts to include your constants like domain, title and description
+- Edit const.ts to include your constants like domain, title and description
+- Deploy to [Vercel](https://nextjs.org/docs/deployment)
+- Create a new Planet Scale database and add the database url to Vercel's env
+- Add a new google oauth client with the following parameters using the google cloud console:
+
+```json
+{
+  "authorizedDomains": ["fullstack-template.vercel.app"],
+  "applicationType": ["webApp"],
+  "authorizedJavascriptOrigins": [
+    "https://fullstack-template.vercel.app",
+    "http://localhost:8080",
+    "http://localhost:3000"
+  ],
+  "redirectUris": [
+    "http://localhost:8080/api/auth/callback/google",
+    "https://fullstack-template.vercel.app/api/auth/callback/google"
+  ]
+}
+```
+
+- Add the google client id and google client secret to .env.local and Vercel as GOOGLE_ID and GOOGLE_SECRET
 
 ## How to Run
 
