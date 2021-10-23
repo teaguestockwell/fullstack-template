@@ -1,13 +1,6 @@
-/* eslint-disable */
-const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
 
 const options = {
-  withBundleAnalyzer: {},
-
   withPwa: {
     pwa: {
       dest: 'public',
@@ -30,14 +23,4 @@ const options = {
   },
 }
 
-module.exports = withPlugins(
-  [
-    [withBundleAnalyzer, options.withBundleAnalyzer],
-    [withPWA, options.withPwa],
-  ],
-
-  {
-    webpack5: true,
-    trailingSlash: true,
-  }
-)
+module.exports = withPWA(options.pwa)
