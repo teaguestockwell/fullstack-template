@@ -117,7 +117,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 ## Getting Started
 
-Follow these easy steps to get started locally
+Follow these easy steps to get started developing locally
 
 - fork the repo
 - clone the fork
@@ -128,10 +128,22 @@ Follow these easy steps to get started locally
 npm i
 ```
 
-- run the server
+- generate prisma orm
 
 ```sh
-npm run start
+npx prisma generate
+```
+
+- create the development database
+
+```sh
+npm run docker:db:up
+```
+
+- run the dev server in watch mod
+
+```sh
+npm run dev
 ```
 
 ## Testing
@@ -143,6 +155,10 @@ npm run test
 ```
 
 e2e tests are run with cypress to get started run:
+
+```sh
+npm run docker:db:up
+```
 
 ```sh
 npm run test:e2e

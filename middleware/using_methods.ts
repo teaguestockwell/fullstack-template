@@ -7,7 +7,14 @@ export const usingMethods = async (
 ): Promise<string> => {
   const {method} = req
 
-  if (!method || !allowedMethods.includes(method)) {
+  console.info({method})
+  console.log('asd')
+
+  if (
+    !method ||
+    typeof method !== 'string' ||
+    !allowedMethods.includes(method.toUpperCase())
+  ) {
     throw new ApiError({
       status: 405,
       body: {msg: `supported method(s): ${allowedMethods.join(', ')}`},
