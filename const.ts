@@ -1,8 +1,8 @@
-export const domain = ''
+export const domain = 'game-feedback.vercel.app'
 
-export const title = 'Fullstack Template'
+export const title = 'Game Feedback'
 
-export const description = 'Fullstack Template'
+export const description = '😭 😍 Rate and comment on your game session'
 
 export const cssVars = {
   shadow: {

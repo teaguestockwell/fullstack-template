@@ -1,6 +1,6 @@
 {
-    "name": "Fullstack Template",
-    "short_name": "Fullstack",
+    "name": "Game Feedback",
+    "short_name": "Rate and comment on your game session",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

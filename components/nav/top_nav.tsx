@@ -32,7 +32,7 @@ export const TopNav = () => {
           alignItems: 'center',
         }}
       >
-        <Link href="/">
+        <Link href="/" passHref>
           <button
             style={{
               display: 'flex',
@@ -53,12 +53,7 @@ export const TopNav = () => {
               },
             }}
           >
-            <Image
-              src={'/apple-touch-icon.png'}
-              width={40}
-              height={40}
-              alt={title}
-            />
+            <Image src={'/logo.png'} width={40} height={40} alt={title} />
 
             <div
               css={{
@@ -76,7 +71,7 @@ export const TopNav = () => {
                 },
               }}
             >
-              Fullstack Template
+              {title}
             </div>
           </button>
         </Link>

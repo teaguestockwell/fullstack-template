@@ -1,7 +1,5 @@
-import {Example} from '../components/example'
-
 const Page = () => {
-  return <Example />
+  return <div>Hello</div>
 }
 
 export default Page

@@ -9,12 +9,12 @@
 <br />
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/71202372/138011873-47e9b176-c06f-4931-9fe6-2b392e3d8e68.png" alt="Logo" width="500vh">
+    <img src="./public/logo.png" alt="Logo" width="500vh">
 
-  <h3 align="center">Fullstack Template</h3>
+  <h3 align="center">Game Feedback</h3>
 
   <p align="center">
-    Jump Start your jam stack with some of my favorite tools
+    😭 😍 Rate and comment on your game session
     <br />
     <!-- <a href="">View Live</a> -->
     <a href="https://github.com/tsAppDevelopment/fullstack-template/issues">Report Bug</a>
@@ -26,6 +26,8 @@
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#implementation">Implementation</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#testing">Testing</a></li>
@@ -41,32 +43,26 @@
 
 ## About The Project
 
-This is an opinionated starting point for common patterns and tools I have used building jam stack sites with Postgres, Next.js, React, and Node.js.
+A web app for submitting and reviewing feedback. This project was bootstraped with another project im working on that I configured for some common patterns: [fullstack-template](https://github.com/tsAppDevelopment/fullstack-template)
 
-### Serverless Connection Pooling
+## Features
 
-Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution was to use AWS RDS Proxy to pool connections on Postgres. Unfortunately, because of the way AWS RDS Proxy pins connections it couldn't be used with [Prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Instead of hosting a custom PgBouncer on an EC2 instance, I switched to Digital Ocean because they offered a managed PostgreSQL RDS service with PgBouncer pre configured.
+- Users may submit a 1-5 rating and a comment for session. Multiple players can submit feedback for the same session, but a single player may only submit one feedback per session.
 
-In the spirit of a serverless architecture and reading, I eventually ended up using Planet Scale because it's built on top of [Vitess](https://vitess.io/) - a MySQL Db sharding middleware created to scale Youtube.
+- After a user submits feedback, they may modify it.
 
-Another thing to keep an eye on in the future is [Prisma's data proxy](https://www.prisma.io/docs/concepts/components/prisma-data-platform#data-proxy) as a managed connection pool and ORM as a service that can reduce lambda cold start times by offloading part of the ORM.
+- Users can view all feedback submitted their session.
 
-### Presigned Image Uploads
-
-When a client want to upload an image, a request is sent to the API to return a presigned upload URL. Before the API returns the URL, it can make sure the user is signed in and that they have not exceeded their rate limit. In the future, rate limiting would be handled by Redis, but for now it lives in a DB table. Once the client receives the upload URL any they input an image, it gets compressed in the browser using [browser-image-compression](https://www.npmjs.com/package/browser-image-compression) until it is within the upload limit. When the image is submitted to the API, the API sends a HEAD req to verify the upload was successful. It can then save the image and remove the Pic job it created when issuing the presigned URL to track stale objects that may be in S3.
-
-### Incremental Static Generation & React Query
-
-Next.js can generate static HTML incrementally into it's edge network cache. When that page is served to the client, the next data is passed to react-query as as initial data. From there react-query can take over and do some powerful things like refetch on window focus and optimistic updates for mutations.
+- Admin users can view submitted feedback for all sessions in a sorted, paginated table.
 
 ### Authentication
 
-Next Auth and Google OAuth are used to authenticate users. From there the API can determine what roles a user has.
+Next Auth and Google OAuth are used to authenticate users. From there the API can determine what roles a user has. In the future the same auth provider that was used before redirecting user to the application could be used.
 
 ## System Architecture
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/71202372/138579764-eca2f1fb-8f8e-43df-9d6a-f56d5dc5f788.png" alt="system architecture" width="1000vh" >
+  <img src="https://user-images.githubusercontent.com/71202372/138581096-73d9fbb5-5afc-49a2-b5e4-f51b1697a7ac.png" alt="system architecture" width="1000vh" >
 </p>
 
 ## Built With
@@ -85,11 +81,6 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 - [prisma](https://www.prisma.io/docs/)
 
-### Object Storage
-
-- S3
-- [Presigned URLs](https://github.com/leerob/nextjs-aws-s3)
-
 ### State
 
 - Global state management with [zustand](https://github.com/pmndrs/zustand)
@@ -103,7 +94,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 ### Styling
 
 - CSS in JS with [emotion](https://emotion.sh/docs/ssr)
-- Dark / light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
+- Dark and light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
 
 ### Static and Runtime Caching
 
@@ -124,7 +115,6 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 Follow these easy steps to get started developing locally
 
-- fork the repo
 - clone the fork
 - cd into the directory
 - install dependencies
@@ -145,7 +135,7 @@ npx prisma generate
 npm run docker:db:up
 ```
 
-- run the dev server in watch mod
+- run the dev server in watch mode
 
 ```sh
 npm run dev
@@ -153,7 +143,7 @@ npm run dev
 
 ## Testing
 
-Unit and component tests are run with jests and test-library, to get started run:
+Unit and component tests are run with jests a test-library to get started run:
 
 ```sh
 npm run test
@@ -196,7 +186,6 @@ npm run test:watch
   "authorizedJavascriptOrigins": [
     "https://fullstack-template.vercel.app",
     "http://localhost:8080",
-    "http://localhost:8081",
     "http://localhost:3000"
   ],
   "redirectUris": [
