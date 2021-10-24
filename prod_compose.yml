@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+    expose:
+      - 3306
+
+  server:
+    build:
+      context: ./
+      dockerfile: ./dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      DATABASE_URL: mysql://user:password@db:3306/db

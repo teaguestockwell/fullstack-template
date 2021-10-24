@@ -1,0 +1,49 @@
+@import './mui_icons.css';
+@import './vars.css';
+
+html {
+  -webkit-font-smoothing: antialiased;
+  outline: none;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0px;
+  line-height: 1.5715;
+  font-size: var(--fs-md);
+  color: var(--fc-0);
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  background-color: var(--bgc-0);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  /* transition: background-color 200ms linear, color 200ms linear,
+    fill 200ms linear, border 200ms linear; */
+}
+
+a {
+  cursor: pointer;
+  color: var(--fc-0);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  all: unset;
+  /* transition: background-color 200ms linear, color 200ms linear,
+  fill 200ms linear, border 200ms linear; */
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  /* transition: background-color 200ms linear, color 200ms linear,
+  fill 200ms linear, border 200ms linear; */
+}
