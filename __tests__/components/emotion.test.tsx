@@ -1,5 +1,5 @@
 import {screen, render} from '@testing-library/react'
-import {Emotion} from '../../components/example/emotion'
+import {Emotion} from '../../components/emotion'
 
 it('renders', () => {
   render(<Emotion />)

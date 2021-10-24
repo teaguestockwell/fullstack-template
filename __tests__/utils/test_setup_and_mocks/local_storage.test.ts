@@ -3,4 +3,8 @@ it('mocks local storage', () => {
   expect(localStorage.getItem('foo')).toBe('bar')
 })
 
+it('resets local storage in between tests', () => {
+  expect(localStorage.getItem('foo')).toBe(undefined)
+})
+
 export {}

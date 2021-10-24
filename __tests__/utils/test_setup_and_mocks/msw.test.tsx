@@ -1,4 +1,4 @@
-import {renderWrapped, screen} from './utils/renderWrap'
+import {renderWrapped, screen} from '../setup/render_wrapped'
 import {useQuery} from 'react-query'
 import axios from 'axios'
 

@@ -1,10 +1,10 @@
 import {render as rtlRender} from '@testing-library/react'
-import {Providers} from '../../components/providers'
+import {Providers} from '../../../components/providers'
 
 const Wrapper = ({children}: {children: JSX.Element | JSX.Element[]}) => {
   return (
     <>
-      <Providers>{children}</Providers>
+      <Providers pageProps={{}}>{children}</Providers>
     </>
   )
 }
