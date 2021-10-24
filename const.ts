@@ -5,12 +5,16 @@ export const title = 'Fullstack Template'
 export const description = 'Fullstack Template'
 
 export const cssVars = {
+  shadow: {
+    WebkitBoxShadow: 'var(--shadow)',
+    MozBoxShadow: 'var(--shadow)',
+    boxShadow: 'var(--shadow)',
+  },
   contentPad: 'var(--content-pad)',
   cardRad: 'var(--card-rad)',
   color: {
     pallet0: 'var(--pallet-0)',
     pallet1: 'var(--pallet-1)',
-    shadow: 'var(--shadow)',
     border: 'var(--border)',
     hoverBg: 'var(--hovbg)',
     nav: 'var(--nav-bg)',

@@ -4,12 +4,13 @@ import {domain, title, description} from '../const'
 import {DefaultSeo} from 'next-seo'
 import {WithClientAuth} from '../hooks/with_client_auth'
 import Head from 'next/head'
-import '../global_styles/global_styles.css'
+import '../styles/global_styles.css'
+import {WithTopNav} from '../hooks/with_top_nav'
 
 interface PageProps {
   Component: {
     auth?: boolean
-    nav?: boolean
+    topNav?: boolean
     title?: string
   }
 }
@@ -47,13 +48,11 @@ export default function App({Component, pageProps}: AppProps & PageProps) {
       </Head>
 
       <Providers pageProps={pageProps}>
-        {Component.auth ? (
-          <WithClientAuth>
+        <WithClientAuth hasAuth={Component.auth}>
+          <WithTopNav hasNav={Component.topNav}>
             <Component {...pageProps} />
-          </WithClientAuth>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          </WithTopNav>
+        </WithClientAuth>
       </Providers>
     </>
   )

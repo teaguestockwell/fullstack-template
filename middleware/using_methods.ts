@@ -7,9 +7,6 @@ export const usingMethods = async (
 ): Promise<string> => {
   const {method} = req
 
-  console.info({method})
-  console.log('asd')
-
   if (
     !method ||
     typeof method !== 'string' ||

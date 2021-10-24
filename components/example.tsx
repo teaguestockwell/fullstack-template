@@ -1,11 +1,8 @@
-import {ThemeToggle} from './theme_toggle'
 import {GlobalTypes} from './global_types'
 import {Emotion} from './emotion'
 import {Zustand} from './zustand'
-import {getPath} from '../../utils'
+import {getPath} from '../utils'
 import Link from 'next/link'
-import {UserAccountAvatar} from './user_account_avatar'
-import {signOut} from '../../node_modules/next-auth/client'
 
 const RandomPost = () => {
   // random string between 0 and 999
@@ -23,10 +20,6 @@ export const Example = () => {
       <Zustand />
 
       <RandomPost />
-
-      <ThemeToggle />
-
-      <UserAccountAvatar onClick={() => signOut()} />
     </div>
   )
 }

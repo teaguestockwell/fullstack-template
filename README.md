@@ -45,7 +45,11 @@ This is an opinionated starting point for common patterns and tools I have used 
 
 ### Serverless Connection Pooling
 
-Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution is using AWS RDS Proxy to pool connections on postgres. Unfortunately, because of the way RDS proxy pins connections it cant be used with [prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Another way may be to roll a custom PgBouncer on an EC2 instance. I ended up switching to Digital Ocean because they offered a managed PostgreSQL with PgBouncer. Another thing to keep an eye on in the future is [prisma's data proxy](https://www.prisma.io/docs/concepts/components/prisma-data-platform#data-proxy) as a managed connection pool and ORM as a service that can reduce lambda cold start times by offloading part of the ORM.
+Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution was to use AWS RDS Proxy to pool connections on Postgres. Unfortunately, because of the way AWS RDS Proxy pins connections it couldn't be used with [Prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Instead of hosting a custom PgBouncer on an EC2 instance, I switched to Digital Ocean because they offered a managed PostgreSQL RDS service with PgBouncer pre configured.
+
+In the spirit of a serverless architecture and reading, I eventually ended up using Planet Scale because it's built on top of [Vitess](https://vitess.io/) - a MySQL Db sharding middleware created to scale Youtube.
+
+Another thing to keep an eye on in the future is [Prisma's data proxy](https://www.prisma.io/docs/concepts/components/prisma-data-platform#data-proxy) as a managed connection pool and ORM as a service that can reduce lambda cold start times by offloading part of the ORM.
 
 ### Presigned Image Uploads
 
@@ -62,7 +66,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 ## System Architecture
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/71202372/138023693-ed273c9a-a80f-4bd3-80f1-3764d036921c.png" alt="system architecture" width="1000vh" >
+  <img src="https://user-images.githubusercontent.com/71202372/138579764-eca2f1fb-8f8e-43df-9d6a-f56d5dc5f788.png" alt="system architecture" width="1000vh" >
 </p>
 
 ## Built With
@@ -99,7 +103,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 ### Styling
 
 - CSS in JS with [emotion](https://emotion.sh/docs/ssr)
-- Dark and light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
+- Dark / light mode hook, default user preference and persistance with [next-themes](https://github.com/pacocoursey/next-themes)
 
 ### Static and Runtime Caching
 
@@ -149,7 +153,7 @@ npm run dev
 
 ## Testing
 
-Unit and component tests are run with jests a test-library to get started run:
+Unit and component tests are run with jests and test-library, to get started run:
 
 ```sh
 npm run test
@@ -192,6 +196,7 @@ npm run test:watch
   "authorizedJavascriptOrigins": [
     "https://fullstack-template.vercel.app",
     "http://localhost:8080",
+    "http://localhost:8081",
     "http://localhost:3000"
   ],
   "redirectUris": [

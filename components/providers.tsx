@@ -21,7 +21,7 @@ export const Providers = ({
           panelProps={{style: {top: 58, bottom: ''}}}
         />
         <NextAuthProvider
-          session={pageProps.session}
+          session={pageProps?.session}
           options={{clientMaxAge: 0, keepAlive: 0}}
         >
           {children}

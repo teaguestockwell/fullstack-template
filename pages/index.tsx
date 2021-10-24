@@ -1,4 +1,4 @@
-import {Example} from '../components/example/example'
+import {Example} from '../components/example'
 
 const Page = () => {
   return <Example />

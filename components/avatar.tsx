@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Link from 'next/link'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import {cssVars} from '../../const'
+import {cssVars} from '../const'
 
 export const Avatar = ({
   src,
@@ -60,7 +60,7 @@ export const Avatar = ({
             width={size}
             style={{
               fontSize: size,
-              color: cssVars.color.font[0],
+              color: cssVars.color.font[1],
               borderRadius: 100,
             }}
             css={hover}

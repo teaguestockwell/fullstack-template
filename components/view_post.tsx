@@ -1,4 +1,4 @@
-import {useServerTimeQuery} from '../../hooks/use_post_query'
+import {useServerTimeQuery} from '../hooks/use_post_query'
 
 export const ViewPost = ({initPost}: {initPost: Types.MockPost.ReadDeep}) => {
   const q = useServerTimeQuery({initPost})

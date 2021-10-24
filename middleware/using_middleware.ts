@@ -24,7 +24,6 @@ export const usingMiddleware = async (
       res.status(e.status)
       res.json(e.body)
     } else {
-      console.error('caught error', e)
       res.status(500)
       res.json({msg: 'server error'})
     }

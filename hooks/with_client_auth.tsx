@@ -8,7 +8,7 @@ import {useEffect} from 'react'
  * with Page.auth = true. This could be useful when you have a SSR page,
  * that is only usable for logged in users because it queries protected api routes.
  */
-export const WithClientAuth = ({children}: {children: any}) => {
+const Effect = ({children}: {children: any}) => {
   const [session, loading] = useSession()
   const isUser = !!session?.user
 
@@ -32,4 +32,18 @@ export const WithClientAuth = ({children}: {children: any}) => {
       Logging in...
     </div>
   )
+}
+
+export const WithClientAuth = ({
+  children,
+  hasAuth = false,
+}: {
+  children: any
+  hasAuth?: boolean
+}) => {
+  if (hasAuth) {
+    return <Effect>{children}</Effect>
+  }
+
+  return children
 }

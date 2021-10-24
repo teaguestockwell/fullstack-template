@@ -1,4 +1,4 @@
-import {cssVars} from '../../const'
+import {cssVars} from '../const'
 
 export const Emotion = () => {
   return (

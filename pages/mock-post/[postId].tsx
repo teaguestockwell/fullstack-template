@@ -1,5 +1,5 @@
 import {NextSeo} from 'next-seo'
-import {ViewPost} from '../../components/example/view_post'
+import {ViewPost} from '../../components/view_post'
 import {domain} from '../../const'
 import {getAllPostIds, getPost} from '../../services/mock_post'
 import {getPath} from '../../utils'
