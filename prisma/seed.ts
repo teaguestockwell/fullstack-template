@@ -77,7 +77,7 @@ const createSessionFeedback = async ({
 }
 
 async function main() {
-  const arr = new Array(10).fill(null)
+  const arr = new Array(50).fill(null)
 
   const users = await Promise.all(arr.map(seedUser))
   const gameSessions = await Promise.all(arr.map(seedGameSession))

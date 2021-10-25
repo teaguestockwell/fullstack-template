@@ -4,13 +4,13 @@ import {render, screen} from '@testing-library/react'
 
 it('renders', () => {
   expect(useFeedback.store.getState().rating).toBe(undefined)
-  render(<EmojiRate />)
+  render(<EmojiRate store={useFeedback.store} />)
   expect(useFeedback.store.getState().rating).toBe(undefined)
   expect(screen.getByLabelText('emoji rating')).toBeInTheDocument()
 })
 
 it('changes feedback on click', () => {
-  render(<EmojiRate />)
+  render(<EmojiRate store={useFeedback.store} />)
 
   screen.getByText('😭').click()
   expect(useFeedback.store.getState().rating).toBe(0)

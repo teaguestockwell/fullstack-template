@@ -1,10 +1,18 @@
 import {cssVars} from '../../const'
-import {useFeedback} from '../../hooks/use_feedback'
 
 const emojis = ['😭', '😕', '😐', '😊', '😍']
 
-export const EmojiRate = () => {
-  const selected = useFeedback.store((s) => s.rating)
+/**
+ * @param store a zustand store that has a rating property
+ */
+export const EmojiRate = ({
+  store,
+  cb = (rating: number) => {},
+}: {
+  store: any
+  cb?: (rating: number) => void
+}) => {
+  const selected = store((s: any) => s.rating)
 
   return (
     <div
@@ -13,17 +21,22 @@ export const EmojiRate = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        height: '3.5rem',
+        height: 57,
       }}
     >
       {emojis.map((emoji, rating) => (
         <button
           key={emoji}
-          onClick={() => useFeedback.store.setState({rating: rating})}
+          onClick={() => {
+            cb(rating)
+            store.setState((s: any) => ({
+              rating: s.rating === rating ? undefined : rating,
+            }))
+          }}
           arai-label={`${rating + 1} of ${emojis.length}`}
           css={{
-            fontSize: '1.8rem',
-            lineHeight: '1.8rem',
+            fontSize: '1.5rem',
+            lineHeight: '1.5rem',
             borderRadius: '50%',
             transform: rating === selected ? 'scale(1.5)' : 'scale(1)',
             textShadow:

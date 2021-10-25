@@ -52,7 +52,7 @@ export const FeedbackPage = ({
           }}
         />
 
-        <EmojiRate />
+        <EmojiRate store={useFeedback.store} />
       </div>
     </Content>
   )

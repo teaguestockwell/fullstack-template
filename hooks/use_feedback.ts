@@ -77,6 +77,7 @@ const useFeedbackMutation = () => {
         })
       }
     },
+    retry: 3,
   })
 }
 
