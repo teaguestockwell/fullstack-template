@@ -49,7 +49,7 @@ class MyDocument extends Document {
           <link
             rel="apple-touch-icon"
             sizes="512x512"
-            href="/android-chrome-512x512.png"
+            href="/android-chrome-384x384.png"
           />
           <link
             rel="icon"

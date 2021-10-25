@@ -12,7 +12,6 @@ body {
   line-height: 1.5715;
   font-size: var(--fs-md);
   color: var(--fc-0);
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-weight: 400;
   background-color: var(--bgc-0);
 }
@@ -22,6 +21,7 @@ body {
 *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   /* transition: background-color 200ms linear, color 200ms linear,
     fill 200ms linear, border 200ms linear; */
 }
@@ -46,4 +46,14 @@ button {
   cursor: pointer;
   /* transition: background-color 200ms linear, color 200ms linear,
   fill 200ms linear, border 200ms linear; */
+}
+
+input:focus {
+  outline: none !important;
+  border: 1px solid var(--fc-1);
+}
+
+textarea:focus {
+  outline: none !important;
+  border: 1px solid var(--fc-0);
 }

@@ -19,13 +19,14 @@
     "docker:db:up": "docker run --name dev-db --rm -d -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=db -p 3306:3306 mysql && sleep 15 && prisma db push --force-reset --accept-data-loss",
     "studio": "prisma studio",
     "reset:db": "prisma db push --force-reset",
+    "reset:reseed:db": "prisma migrate reset",
     "docker:build": "docker-compose -f prod_compose.yml -p FS-Template build --parallel",
     "docker:up": "docker-compose -f prod_compose.yml -p Fs-Template up --force-recreate",
     "docker:prune": "docker system prune -f",
     "docker:entrypoint": "node -e \"(() => {setTimeout(() => {}, 15000)})()\" && prisma migrate deploy && next start -p 8080"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -48,6 +49,8 @@
     "zustand": "^3.6.0"
   },
   "devDependencies": {
+    "@types/node": "^16.11.4",
+    "ts-node": "^10.4.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",

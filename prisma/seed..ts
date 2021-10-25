@@ -1,14 +1,43 @@
-import prisma from '@prisma/client'
-const {PrismaClient} = prisma
+import {PrismaClient} from '@prisma/client'
 import faker from 'faker'
 import {v4} from 'uuid'
 
 const client = new PrismaClient()
 
+// for testing having auto increment id's is handy
+class AutoInc {
+  userId: number
+  gameSessionId: number
+  feedbackId: number
+
+  constructor() {
+    this.userId = 0
+    this.gameSessionId = 0
+    this.feedbackId = 0
+  }
+
+  getUserId() {
+    this.userId++
+    return this.userId.toString()
+  }
+
+  getGameSessionId() {
+    this.gameSessionId++
+    return this.gameSessionId.toString()
+  }
+
+  getFeedbackId() {
+    this.feedbackId++
+    return this.feedbackId.toString()
+  }
+}
+
+const autoInc = new AutoInc()
+
 const seedUser = async () => {
   return client.user.create({
     data: {
-      id: v4(),
+      id: autoInc.getUserId(),
       oauthName: faker.name.findName(),
       email: faker.internet.email() + v4(),
       oauthImgSrc: faker.image.avatar(),
@@ -20,18 +49,25 @@ const seedUser = async () => {
 const seedGameSession = async () => {
   return client.gameSession.create({
     data: {
-      id: v4(),
+      id: autoInc.getGameSessionId(),
     },
   })
 }
 
-const random = (min, max) => {
+const random = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-const createSessionFeedback = async ({gameSession, user}) => {
+const createSessionFeedback = async ({
+  gameSession,
+  user,
+}: {
+  gameSession: any
+  user: any
+}) => {
   return client.feedback.create({
     data: {
+      id: autoInc.getFeedbackId(),
       userId: user.id,
       gameSessionId: gameSession.id,
       comment: faker.commerce.productDescription(),
