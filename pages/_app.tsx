@@ -48,11 +48,11 @@ export default function App({Component, pageProps}: AppProps & PageProps) {
       </Head>
 
       <Providers pageProps={pageProps}>
-        <WithClientAuth hasAuth={Component.auth}>
-          <WithTopNav hasNav={Component.topNav}>
+        <WithTopNav hasNav={Component.topNav}>
+          <WithClientAuth hasAuth={Component.auth}>
             <Component {...pageProps} />
-          </WithTopNav>
-        </WithClientAuth>
+          </WithClientAuth>
+        </WithTopNav>
       </Providers>
     </>
   )

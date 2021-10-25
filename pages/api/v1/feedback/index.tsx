@@ -7,12 +7,12 @@ import * as yup from 'yup'
 const querySchema = yup.object().shape({
   userId: yup.string().max(36),
   gameSessionId: yup.string().max(36),
-  createdAtGTE: yup.date(),
-  updatedAtGTE: yup.date(),
-  createdAtLTE: yup.date(),
-  updatedAtLTE: yup.date(),
+  createdAtGTE: yup.date().max(36),
+  updatedAtGTE: yup.date().max(36),
+  createdAtLTE: yup.date().max(36),
+  updatedAtLTE: yup.date().max(36),
   rating: yup.number().min(0).max(4),
-  cursor: yup.string(),
+  cursor: yup.string().max(36),
   pageSize: yup.number().min(25).max(1000),
 })
 

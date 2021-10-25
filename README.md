@@ -9,7 +9,9 @@
 <br />
 
 <p align="center">
+  <a href="https://game-feedback.vercel.app">
     <img src="./public/logo.png" alt="Logo" width="500vh">
+  </a>
 
   <h3 align="center">Game Feedback</h3>
 
@@ -18,6 +20,8 @@
     <br />
     <!-- <a href="">View Live</a> -->
     <a href="https://github.com/tsAppDevelopment/fullstack-template/issues">Report Bug</a>
+    <a href="https://game-feedback.vercel.app">View Site</a>
+    <a href="https://teaguestockwell.com/">About Me</a>
   </p>
 </p>
 
@@ -27,6 +31,9 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#features">Features</a></li>
+    <li><a href="#api">API</a></li>
+    <li><a href="#ui">UI</a></li>
+    <li><a href="#limitations">Limitations</a></li>
     <li><a href="#implementation">Implementation</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
     <li><a href="#built-with">Built With</a></li>
@@ -43,17 +50,170 @@
 
 ## About The Project
 
-A web app for submitting and reviewing feedback. This project was bootstraped with another project im working on that I configured for some common patterns: [fullstack-template](https://github.com/tsAppDevelopment/fullstack-template)
+A web app for submitting and reviewing feedback. This project was boot strapped with another project im working on that I configured for some common patterns: [fullstack-template](https://github.com/tsAppDevelopment/fullstack-template)
+
+<img src="https://user-images.githubusercontent.com/71202372/138722325-7a09c4aa-2c16-4cdb-8c11-4f3b4a31466e.gif" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721971-022aab5e-d96b-452d-9823-ed4d05c0be8a.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721968-07d18429-ea5c-4337-bf7f-fc9c4ac4231f.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721964-edc6e24b-81f4-43eb-a903-a08b8f13f3ee.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721956-adc4c1db-7346-4b0e-b370-0bc835b95efa.png" width="500vh"></a>
 
 ## Features
 
-- Users may submit a 1-5 rating and a comment for session. Multiple players can submit feedback for the same session, but a single player may only submit one feedback per session.
+- Static, Server Side, and Client side rendered pages with Nextjs. Pages can cached for lightning fast loading. Server side rendered pages like: /feedback/[gameSessionId]/edit also remove a loading state from the client for a better user experience.
 
-- After a user submits feedback, they may modify it.
+- Users may submit a 1-5 rating with an emoji plus a comment for each session. Multiple players can submit feedback for the same session, but a single player may only submit one feedback per session.
 
-- Users can view all feedback submitted their session.
+- After a user submits feedback, they may modify it. This serves a dual purpose because after a user submits feedback for one session, they can't create another for the same session. They can only modify their original.
 
-- Admin users can view submitted feedback for all sessions in a sorted, paginated table.
+- I setup infinite scrolling with react query on the /feedback view. As you scroll, react-query will fetch more data based on the query parameters. This allows you to filter and sort by rating (emoji).
+
+- Dark and light mode
+
+- Responsive for mobile and desktop
+
+## API
+
+The rest API was built using Nextjs serverless routes. Whats great about this is its incredibly easy to scale this to a multi availability zone deployment either with Vercel, or ejecting them and hosting directly on AWS.
+
+Serverless functions are great, but there are a few common pitfalls that you can run into: slow cold starts and exhausting your database's connection limit. I tried a handfuls of cloud providers and some of their hosted solutions for connection pooling including: AWS RDS, AWS Aurora, and Digital Ocean. I settled with a new platform called Planet Scale because they made the MySQL sharding middleware used by YouTube: [Vitess](https://vitess.io/). This has been working great with Vercels functions, and theoretically this architecture could be used all the way up to planet scale, but im not sure what how well it would hold up if you are trying to serving web apps to galaxies!
+
+GET /api/feedback
+
+- get a paginated and or filtered list of all feedback and their users
+- query params
+
+```json
+{
+  "userId": "nullable string  0 - 36 chars",
+  "gameSessionId": "nullable string  0 - 36 chars",
+  "createdAtGTE": "nullable time stamp to filter where feedback.createdAt > param",
+  "createdAtLTE": "nullable time stamp to filter where feedback.createdAt < param",
+  "updatedAtGTE": "nullable time stamp to filter where feedback.updatedAt > param",
+  "updatedAtLTE": "nullable time stamp to filter where feedback.updatedAt < param",
+  "rating": "nullable number 0 - 4 inclusive",
+  "cursor": "non nullable 1 - 36 chars",
+  "pageSize": "nullable from 25 - 1000 inclusive, default of 25"
+}
+```
+
+- 200 res.body
+
+```json
+[
+  {
+    "id": "2475",
+    "userId": "25",
+    "gameSessionId": "50",
+    "createdAt": "2021-10-25T13:29:25.665Z",
+    "updatedAt": "2021-10-25T13:29:25.665Z",
+    "rating": 1,
+    "comment": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+    "user": {
+      "oauthImgSrc": "https://cdn.fakercloud.com/avatars/mcflydesign_128.jpg",
+      "oauthName": "Harriet Robel"
+    }
+  }
+]
+```
+
+- 400 res.body
+
+```json
+{
+  "msg": "a detailed message here explaining some missing query parameter"
+}
+```
+
+- 405 res.body
+
+```json
+{
+  "msg": "supported method(s): GET"
+}
+```
+
+PUT /api/v1/feedback/[gameSessionId]
+
+- create or update your feedback for one GameSession
+- Google OAuth is required
+  req.body
+
+```json
+{
+  "comment": "a non null string from 1 - 2000 chars",
+  "rating": 1 // a non null int from 0 - 4 inclusive that represent an emoji vote
+}
+```
+
+- 200 res.body
+
+```json
+{
+  "id": "id of feedback",
+  "usedId": "your used id",
+  "gameSessionId": "id of game session",
+  "createdAt": "timestamp",
+  "updatedAt": "timestamp",
+  "comment": "a non null string from 1 - 2000 chars",
+  "rating": 1 // a non null int from 0 - 4 inclusive that represent an emoji vote
+}
+```
+
+- 400 res.body
+
+```json
+{
+  "msg": "a detailed message here explaining some missing parameter"
+}
+```
+
+- 403 res.body
+
+```json
+{
+  "msg": "a detailed message here explaining some missing parameter"
+}
+```
+
+- 404 res.body
+
+```json
+{
+  "msg": "you must be signed in"
+}
+```
+
+- 405 res.body
+
+```json
+{
+  "msg": "supported method(s): PUT"
+}
+```
+
+Other endpoints created by [next-auth](https://next-auth.js.org/getting-started/rest-api)
+
+## UI
+
+/ - Home page, not much on here, just some links to the other pages.
+/feedback - View a infinite list of all feedbacks, the UI supports filtering by rating (emoji).
+/feedback/[gamseSessionId]/edit - Edit your feedback for a game session.
+/feedback/[gamseSessionId]/new - Add feedback for a session.
+
+## Limitations
+
+- Time. If I had more time I would focus in on a more robust e2e testing suit with a login workflow.
+
+- In a real environment, there is most likely another service that owns the game sessions, and the API would use that service. For the scope of this demo, I used a seed script to create some mock sessions. Similarly, I chose not to expose an api to edit these sessions. Another hypothetical factor with real implementation would be that a users may have different roles against sessions, so they would only be able to leave feedback on the on the games they participated in.
+
+- For this demo, I chose to use Google's OAuth service. I would imagine users land on a site like this after finishing a game. That means that they would have most likely already signed in with that game's auth provider. To make this a more seamless experience, I would use that same auth provider.
+
+- The portal to view all the feedback can be read by everyone, not just an ops team. Roles could be setup to prevent this, but for now having it open to be read by all users works great because they can view some of the comments left by other members of a their game session.
+
+- Delete was not implemented. For API routes.
+
+- Known bug with the theme toggle not saving the state of the toggle icon.
 
 ### Authentication
 
@@ -79,7 +239,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 ### Database ORM
 
-- [prisma](https://www.prisma.io/docs/)
+- [Prisma](https://www.prisma.io/docs/)
 
 ### State
 
@@ -115,7 +275,7 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 Follow these easy steps to get started developing locally
 
-- clone the fork
+- clone this repo
 - cd into the directory
 - install dependencies
 
@@ -129,7 +289,7 @@ npm i
 npx prisma generate
 ```
 
-- create the development database
+- create the development database, and run the seeds to populate it
 
 ```sh
 npm run docker:db:up
@@ -143,7 +303,7 @@ npm run dev
 
 ## Testing
 
-Unit and component tests are run with jests a test-library to get started run:
+Unit and component tests are run with jests and test-library, to get started run:
 
 ```sh
 npm run test
@@ -221,4 +381,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Teague Stockwell - [LinkedIn](https://www.linkedin.com/in/teague-stockwell)
+Teague Stockwell - [LinkedIn](https://www.linkedin.com/in/teague-stockwell) [My Website](https://teaguestockwell.com)

@@ -12,7 +12,7 @@ export const getServerSideProps: Types.Next.GetServerSideProps = async (
   if (!jwt?.sub) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/auth/signin',
         permanent: false,
       },
     }
@@ -27,13 +27,9 @@ export const getServerSideProps: Types.Next.GetServerSideProps = async (
     },
   })
 
-  // not a valid feedback id
-  if (!feedback || jwt.sub !== feedback.userId) {
+  if (!feedback) {
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
+      notFound: true,
     }
   }
 
