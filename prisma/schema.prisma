@@ -8,14 +8,41 @@ datasource db {
 }
 
 model User {
-  id          String    @id
-  email       String @unique
+  id    String @id
+  email String @unique
 
-  oauthName    String
-  oauthImgSrc  String
-  about        String @default("")  
+  oauthName   String
+  oauthImgSrc String
+  about       String @default("")
 
-  lastSignIn  DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  lastSignIn DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  feedbacks    Feedback[]
+}
+
+model GameSession {
+  id       String     @id @default(cuid())
+
+  createdAt DateTime   @default(now())
+
+  feedbacks Feedback[]
+}
+
+model Feedback {
+  id String @unique @default(cuid())
+
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  gameSessionId String
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  comment String
+  rating  Int
+
+  // compound foreign key, each user, will only have one feedback per gameSession
+  @@id([userId, gameSessionId])
 }
