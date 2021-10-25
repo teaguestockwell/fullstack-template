@@ -1,4 +1,3 @@
-import React from 'react'
 import {Cell} from './cell'
 import {useInfiniteFeedbacks, store} from '../../hooks/use_infinite_feedbacks'
 import {Content} from '../../components/content'
@@ -6,6 +5,7 @@ import {useBottomScroll} from '../../hooks/use_bottom_scroll'
 import {LoadingText} from '../loading_text'
 import {EmojiRate} from './emoji_rate'
 import {cssVars} from '../../const'
+import Lazy from 'react-lazyload'
 
 export const InfiniteFeedback = () => {
   //const queryClient = useQueryClient()
@@ -13,7 +13,7 @@ export const InfiniteFeedback = () => {
   const q = useInfiniteFeedbacks(rating)
   useBottomScroll(() => {
     q.fetchNextPage()
-  }, 200)
+  })
 
   if (!q.data) {
     return (
@@ -35,6 +35,7 @@ export const InfiniteFeedback = () => {
             left: 0,
             right: 0,
             backgroundColor: cssVars.color.nav,
+            ...cssVars.shadow,
           }}
         >
           <EmojiRate store={store} />
@@ -42,14 +43,14 @@ export const InfiniteFeedback = () => {
 
         {/* load page data */}
         {q.data.pages.map((page, pageI) => (
-          <React.Fragment key={pageI}>
+          <Lazy key={pageI} unmountIfInvisible offset={300}>
             {page.map((feedback) => (
               <Cell key={feedback.id} feedback={feedback} />
             ))}
-          </React.Fragment>
+          </Lazy>
         ))}
 
-        {q.isLoading && (
+        {q.isFetching && (
           <LoadingText text="Hang on one second. We are loading more." />
         )}
 

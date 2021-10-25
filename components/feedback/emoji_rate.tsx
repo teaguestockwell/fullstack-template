@@ -7,7 +7,7 @@ const emojis = ['😭', '😕', '😐', '😊', '😍']
  */
 export const EmojiRate = ({
   store,
-  cb = (rating: number) => {},
+  cb = (_rating: number) => {},
 }: {
   store: any
   cb?: (rating: number) => void
