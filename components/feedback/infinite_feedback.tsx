@@ -1,19 +1,15 @@
 import {Cell} from './cell'
 import {useInfiniteFeedbacks, store} from '../../hooks/use_infinite_feedbacks'
 import {Content} from '../../components/content'
-import {useBottomScroll} from '../../hooks/use_bottom_scroll'
 import {LoadingText} from '../loading_text'
 import {EmojiRate} from './emoji_rate'
 import {cssVars} from '../../const'
 import Lazy from 'react-lazyload'
+import {UseFetchMore} from '../../hooks/use_fetch_more'
 
 export const InfiniteFeedback = () => {
-  //const queryClient = useQueryClient()
   const rating = store((s) => s.rating)
   const q = useInfiniteFeedbacks(rating)
-  useBottomScroll(() => {
-    q.fetchNextPage()
-  })
 
   if (!q.data) {
     return (
@@ -49,6 +45,8 @@ export const InfiniteFeedback = () => {
             ))}
           </Lazy>
         ))}
+
+        <UseFetchMore fetchMore={() => q.fetchNextPage()} />
 
         {q.isFetching && (
           <LoadingText text="Hang on one second. We are loading more." />
