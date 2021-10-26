@@ -8,13 +8,15 @@ export const usingJWT = async (req: Types.Next.NextApiRequest) => {
   const jwt = await getValidatedToken(req)
 
   if (!jwt) {
-    throw new ApiError({status: 403, body: 'you must be signed in'})
+    throw new ApiError({status: 403, body: {msg: 'you must be signed in'}})
   }
 
   if (!jwt?.email || !jwt.sub || !jwt.picture || !jwt.name) {
     throw new ApiError({
       status: 500,
-      body: 'there is a problem with your account, please try to login again',
+      body: {
+        msg: 'there is a problem with your account, please try to login again',
+      },
     })
   }
 

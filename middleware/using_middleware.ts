@@ -24,6 +24,7 @@ export const usingMiddleware = async (
       res.status(e.status)
       res.json(e.body)
     } else {
+      if (process.env.NODE_ENV === 'development') console.error(e)
       res.status(500)
       res.json({msg: 'server error'})
     }

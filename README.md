@@ -139,7 +139,7 @@ npm i
 npx prisma generate
 ```
 
-- create the development database
+- create the development database, and run the seeds to populate it
 
 ```sh
 npm run docker:db:up
@@ -232,4 +232,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Teague Stockwell - [LinkedIn](https://www.linkedin.com/in/teague-stockwell)
+Teague Stockwell - [LinkedIn](https://www.linkedin.com/in/teague-stockwell) [My Website](https://teaguestockwell.com)

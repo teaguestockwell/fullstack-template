@@ -23,4 +23,4 @@ const options = {
   },
 }
 
-module.exports = withPWA(options.pwa)
+module.exports = withPWA(options.withPwa)

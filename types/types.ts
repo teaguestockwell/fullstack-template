@@ -1,6 +1,6 @@
-import type * as Example from './example'
 import type * as Util from './util'
 import type * as Next from 'next'
-import type * as MockPost from './mock_post'
+import type * as Prisma from '@prisma/client'
+import type * as Feedback from './feedback'
 
-export type {Example, Util, Next, MockPost}
+export type {Util, Next, Prisma, Feedback}

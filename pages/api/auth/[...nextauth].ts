@@ -1,4 +1,4 @@
-import {signInCallback} from './../../../services/user/user'
+import {signInCallback} from '../../../services/user/sign_in'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import {getToken} from 'next-auth/jwt'

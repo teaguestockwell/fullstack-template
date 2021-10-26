@@ -32,7 +32,7 @@ export const TopNav = () => {
           alignItems: 'center',
         }}
       >
-        <Link href="/">
+        <Link href="/" passHref>
           <button
             style={{
               display: 'flex',
@@ -76,7 +76,7 @@ export const TopNav = () => {
                 },
               }}
             >
-              Fullstack Template
+              {title}
             </div>
           </button>
         </Link>
