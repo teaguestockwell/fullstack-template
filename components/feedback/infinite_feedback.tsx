@@ -53,7 +53,7 @@ export const InfiniteFeedback = () => {
         )}
 
         {!q.hasNextPage && !q.isLoading && (
-          <LoadingText text="Congrats! You made it though all the feedback." />
+          <LoadingText text="Congrats! You made it through all the feedback." />
         )}
       </>
     </Content>

@@ -60,7 +60,7 @@ A web app for submitting and reviewing feedback. This project was boot strapped 
 
 ## Features
 
-- Static, Server Side, and Client side rendered pages with Nextjs. Pages can cached for lightning fast loading. Server side rendered pages like: /feedback/[gameSessionId]/edit also remove a loading state from the client for a better user experience.
+- Static, Server Side, and Client side rendering with Next.js. Static pages /feedback can server by a CDN for lightning fast initial loads and server side rendered pages like: /feedback/[gameSessionId]/edit remove a loading state from the client for a better user experience.
 
 - Users may submit a 1-5 rating with an emoji plus a comment for each session. Multiple players can submit feedback for the same session, but a single player may only submit one feedback per session.
 
@@ -74,14 +74,14 @@ A web app for submitting and reviewing feedback. This project was boot strapped 
 
 ## API
 
-The rest API was built using Nextjs serverless routes. Whats great about this is its incredibly easy to scale this to a multi availability zone deployment either with Vercel, or ejecting them and hosting directly on AWS.
+The rest API was built using Next.js's serverless API routes. Whats great about this is its incredibly easy to scale this to a multi availability zone deployment either with Vercel, or by ejecting and hosting them directly on AWS.
 
-Serverless functions are great, but there are a few common pitfalls that you can run into: slow cold starts and exhausting your database's connection limit. I tried a handfuls of cloud providers and some of their hosted solutions for connection pooling including: AWS RDS, AWS Aurora, and Digital Ocean. I settled with a new platform called Planet Scale because they made the MySQL sharding middleware used by YouTube: [Vitess](https://vitess.io/). This has been working great with Vercels functions, and theoretically this architecture could be used all the way up to planet scale, but im not sure what how well it would hold up if you are trying to serving web apps to galaxies!
+Serverless functions are great, but there are a few common pitfalls that you can run into: slow cold starts and exhausting your database's connection limit. I tried a handfuls of cloud providers and some of their hosted solutions for connection pooling including: AWS RDS with RDS Proxy, AWS Aurora, and Digital Ocean with PgBouncer. I settled with a new platform called Planet Scale because they made the MySQL sharding middleware used by YouTube: [Vitess](https://vitess.io/). This has been working great with Vercel's functions, and theoretically this architecture could be used all the way up to planet scale, but im not sure how well it would hold up if you are trying to serving web apps to galaxies!
 
-GET /api/feedback
+GET /api/v1/feedback
 
 - get a paginated and or filtered list of all feedback and their users
-- query params
+  query params
 
 ```json
 {
@@ -172,7 +172,7 @@ PUT /api/v1/feedback/[gameSessionId]
 
 ```json
 {
-  "msg": "a detailed message here explaining some missing parameter"
+  "msg": "you must be signed in"
 }
 ```
 
@@ -180,7 +180,7 @@ PUT /api/v1/feedback/[gameSessionId]
 
 ```json
 {
-  "msg": "you must be signed in"
+  "msg": "game session / user not found"
 }
 ```
 
@@ -192,14 +192,14 @@ PUT /api/v1/feedback/[gameSessionId]
 }
 ```
 
-Other endpoints created by [next-auth](https://next-auth.js.org/getting-started/rest-api)
+Other endpoints for auth created by [next-auth](https://next-auth.js.org/getting-started/rest-api)
 
 ## UI
 
-/ - Home page, not much on here, just some links to the other pages.
+/ - There is not much on here, just some links to the other pages.
 /feedback - View a infinite list of all feedbacks, the UI supports filtering by rating (emoji).
-/feedback/[gamseSessionId]/edit - Edit your feedback for a game session.
-/feedback/[gamseSessionId]/new - Add feedback for a session.
+/feedback/[gameSessionId]/edit - Edit your feedback for a game session.
+/feedback/[gameSessionId]/new - Add feedback for a session.
 
 ## Limitations
 
