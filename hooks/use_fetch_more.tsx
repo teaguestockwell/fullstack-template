@@ -4,13 +4,22 @@ export const UseFetchMore = ({fetchMore}: {fetchMore: () => void}) => {
   const ref = React.useRef(null) as any
 
   React.useEffect(() => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver
     const options = {
       root: null,
-      rootMargin: '200px',
+      // setting the root margin to high will cause the observer to fire in an infinite loop if it is rendered under lazy loaded elements
+      rootMargin: '50px',
+      // this does not matter since the div has no height
       threshold: 1.0,
     }
 
-    const observer = new IntersectionObserver(fetchMore, options)
+    const shouldFetchMore: IntersectionObserverCallback = (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        fetchMore()
+      }
+    }
+
+    const observer = new IntersectionObserver(shouldFetchMore, options)
 
     if (ref?.current) {
       observer.observe(ref.current)
