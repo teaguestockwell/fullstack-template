@@ -20,10 +20,10 @@
     "studio": "prisma studio",
     "reset:db": "prisma db push --force-reset",
     "reset:reseed:db": "prisma migrate reset -f",
-    "docker:build": "docker-compose -f prod_compose.yml -p FS-Template build --parallel",
-    "docker:up": "docker-compose -f prod_compose.yml -p Fs-Template up --force-recreate",
+    "docker:build": "docker-compose -f prod_compose.yml -p game-feedback build --parallel",
+    "docker:up": "docker-compose -f prod_compose.yml -p game-feedback up --force-recreate",
     "docker:prune": "docker system prune -f",
-    "docker:entrypoint": "node -e \"(() => {setTimeout(() => {}, 15000)})()\" && prisma migrate deploy && next start -p 8080"
+    "docker:entrypoint": "sleep 15 && prisma migrate reset --force && next start -p 8080"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
