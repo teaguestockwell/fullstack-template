@@ -18,7 +18,9 @@ export const InfiniteFeedback = () => {
   }
 
   if (q.status === 'error') {
-    ;<LoadingText text="Uhh, oh. Looks like we ran into an error. Please refresh the page." />
+    return (
+      <LoadingText text="Uhh, oh. Looks like we ran into an error. Please refresh the page." />
+    )
   }
 
   return (
