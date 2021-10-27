@@ -29,6 +29,7 @@ const Route = async (
       await querySchema.validate(params)
     } catch (e) {
       res.status(400).json({msg: `${e}`})
+      return
     }
 
     const filters = [] as any

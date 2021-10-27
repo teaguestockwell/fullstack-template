@@ -13,7 +13,11 @@ const formatDate = (date: Date) => {
 
 const emojis = ['😭', '😕', '😐', '😊', '😍']
 
-export const Cell = ({feedback}: {feedback: Types.Feedback.WithUser}) => {
+export const InfiniteFeedbackItem = ({
+  feedback,
+}: {
+  feedback: Types.Feedback.WithUser
+}) => {
   return (
     <div
       style={{
@@ -58,7 +62,7 @@ export const Cell = ({feedback}: {feedback: Types.Feedback.WithUser}) => {
             </button>
           </Link>
 
-          <div
+          <p
             style={{
               paddingLeft: 12,
               fontWeight: 100,
@@ -67,7 +71,7 @@ export const Cell = ({feedback}: {feedback: Types.Feedback.WithUser}) => {
             }}
           >
             {formatDate(feedback.createdAt)}
-          </div>
+          </p>
         </div>
 
         <Link passHref href={''}>
@@ -87,7 +91,7 @@ export const Cell = ({feedback}: {feedback: Types.Feedback.WithUser}) => {
           </button>
         </Link>
 
-        <div style={{marginLeft: 6}}>{feedback.comment}</div>
+        <p style={{marginLeft: 6}}>{feedback.comment}</p>
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ export const LoadingText = ({
   style?: React.CSSProperties
 }) => {
   return (
-    <div
+    <h1
       style={{
         textAlign: 'center',
         fontSize: 18,
@@ -19,6 +19,6 @@ export const LoadingText = ({
       }}
     >
       {text}
-    </div>
+    </h1>
   )
 }

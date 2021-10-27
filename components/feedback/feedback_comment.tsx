@@ -1,8 +1,12 @@
 import React from 'react'
-import {useFeedback} from '../../hooks/use_feedback'
+import {feedback} from '../../hooks/use_feedback'
 
-export const Comment = ({style = {}}: {style?: React.CSSProperties}) => {
-  const value = useFeedback.store((s) => s.comment)
+export const FeedbackComment = ({
+  style = {},
+}: {
+  style?: React.CSSProperties
+}) => {
+  const value = feedback.useStore((s) => s.comment)
 
   return (
     <textarea
@@ -16,7 +20,7 @@ export const Comment = ({style = {}}: {style?: React.CSSProperties}) => {
         ...style,
       }}
       value={value}
-      onChange={(e) => useFeedback.store.setState({comment: e.target.value})}
+      onChange={(e) => feedback.useStore.setState({comment: e.target.value})}
     />
   )
 }

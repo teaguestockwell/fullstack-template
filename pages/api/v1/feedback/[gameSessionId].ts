@@ -27,6 +27,7 @@ const Route = async (
       await feedbackSchema.validate(req.body)
     } catch (e) {
       res.status(400).json({msg: `${e}`})
+      return
     }
 
     // verify game session exists

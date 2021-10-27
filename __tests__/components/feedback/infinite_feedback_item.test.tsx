@@ -1,4 +1,4 @@
-import {Cell} from '../../../components/feedback/cell'
+import {InfiniteFeedbackItem} from '../../../components/feedback/infinite_feedback_item'
 import {screen, render} from '@testing-library/react'
 
 const mockFeedback: Types.Feedback.WithUser = {
@@ -16,6 +16,6 @@ const mockFeedback: Types.Feedback.WithUser = {
 }
 
 it('renders', () => {
-  render(<Cell feedback={mockFeedback} />)
+  render(<InfiniteFeedbackItem feedback={mockFeedback} />)
   expect(screen.getByText('name')).toBeInTheDocument()
 })

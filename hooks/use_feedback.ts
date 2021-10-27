@@ -19,10 +19,11 @@ const initState: State = {
   feedbackId: undefined,
 }
 
-const store = create(combine(initState, (set) => ({set})))
+const useStore = create(combine(initState, (set) => ({set})))
 
-const useIsValid = () =>
-  store((s) => s.comment.length && s.rating !== undefined)
+const isValid = (s: State) => s.comment.length > 0 && s.rating !== undefined
+
+const useIsValid = () => useStore(isValid)
 
 /**
  * @param state the initial state of the store
@@ -40,14 +41,15 @@ const useInit = ({
 
   return React.useEffect(() => {
     if (initialData) {
-      store.setState({
+      useStore.setState({
         comment: initialData.comment,
         rating: initialData.rating,
         gameSessionId: initialData.gameSessionId,
         feedbackId: initialData.id,
       })
     } else {
-      store.setState({
+      useStore.setState({
+        ...initState,
         gameSessionId,
       })
     }
@@ -56,15 +58,18 @@ const useInit = ({
 }
 
 const putFeedback = async () => {
-  const state = store.getState()
-  const {data} = await axios.put(
-    `/api/v1/feedback/${state.gameSessionId}`,
-    state
-  )
+  const s = useStore.getState()
+
+  const {data} = await axios({
+    method: 'put',
+    url: `/api/feedback/${s.feedbackId}`,
+    data: s,
+  })
+
   return data as Types.Prisma.Feedback
 }
 
-const useFeedbackMutation = () => {
+const usePutMutation = () => {
   const router = useRouter()
 
   return useMutation(putFeedback, {
@@ -81,9 +86,9 @@ const useFeedbackMutation = () => {
   })
 }
 
-export const useFeedback = {
-  store,
+export const feedback = {
+  useStore,
   useInit,
   useIsValid,
-  useFeedbackMutation,
+  usePutMutation,
 }

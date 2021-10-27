@@ -9,7 +9,7 @@ import {Avatar} from './avatar'
 export const UserAccountAvatar = ({onClick}: {onClick?: () => void}) => {
   const [session, loading] = useSession()
 
-  if (!session || loading || !session.user) {
+  if (!session?.user || loading) {
     return (
       <Avatar props={{onClick: () => signIn('google')}} hoverOverride={true} />
     )

@@ -1,21 +1,25 @@
 import {cssVars} from '../../const'
-import {useFeedback} from '../../hooks/use_feedback'
+import {feedback} from '../../hooks/use_feedback'
 import {Content} from '../content'
-import {Comment} from './comment'
-import {EmojiRate} from './emoji_rate'
-import {Save} from './save'
+import {FeedbackComment} from './feedback_comment'
+import {FeedbackRate} from './feedback_rate'
+import {SaveFeedbackButton} from './save_feedback_button'
 
 export const FeedbackPage = ({
   initialData,
 }: {
   initialData: Types.Prisma.Feedback | null
 }) => {
-  useFeedback.useInit({initialData})
+  feedback.useInit({initialData})
 
   return (
-    <Content style={{marginTop: 20}}>
+    <Content
+      style={{
+        marginTop: 20,
+      }}
+    >
       <div
-        css={{
+        style={{
           borderRadius: cssVars.cardRad,
           border: `1px solid ${cssVars.color.font[1]}`,
         }}
@@ -36,10 +40,10 @@ export const FeedbackPage = ({
             >
               Feedback
             </h3>
-            <Save />
+            <SaveFeedbackButton />
           </div>
 
-          <Comment style={{marginTop: 10}} />
+          <FeedbackComment style={{marginTop: 10}} />
         </div>
 
         <div
@@ -52,7 +56,7 @@ export const FeedbackPage = ({
           }}
         />
 
-        <EmojiRate store={useFeedback.store} />
+        <FeedbackRate store={feedback.useStore} />
       </div>
     </Content>
   )
