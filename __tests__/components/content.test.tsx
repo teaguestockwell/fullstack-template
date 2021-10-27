@@ -1,5 +1,5 @@
-import {Content} from '../../components/content'
 import {render, screen} from '@testing-library/react'
+import {Content} from '../../components/content'
 
 const Test = () => <div>Test</div>
 

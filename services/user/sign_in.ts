@@ -1,5 +1,5 @@
-import {client} from '../../prisma/client'
 import {JWT} from 'next-auth/jwt'
+import {client} from '../../prisma/client'
 
 export const signInCallback = async ({jwt}: {jwt: JWT}) => {
   await client.user.upsert({

@@ -1,5 +1,5 @@
+import {render, screen} from '@testing-library/react'
 import {InfiniteFeedbackItem} from '../../../components/feedback/infinite_feedback_item'
-import {screen, render} from '@testing-library/react'
 
 const mockFeedback: Types.Feedback.WithUser = {
   id: '1',

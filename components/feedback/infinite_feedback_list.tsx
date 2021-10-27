@@ -1,11 +1,11 @@
-import {InfiniteFeedbackItem} from './infinite_feedback_item'
+import Lazy from 'react-lazyload'
+import {cssVars} from '../../const'
 import {infiniteFeedback} from '../../hooks/use_infinite_feedbacks'
+import {UseInViewport} from '../../hooks/use_in_viewport'
 import {Content} from '../content'
 import {LoadingText} from '../loading_text'
 import {FeedbackRate} from './feedback_rate'
-import {cssVars} from '../../const'
-import Lazy from 'react-lazyload'
-import {UseInViewport} from '../../hooks/use_in_viewport'
+import {InfiniteFeedbackItem} from './infinite_feedback_item'
 
 export const InfiniteFeedbackList = () => {
   const rating = infiniteFeedback.useStore((s) => s.rating)

@@ -1,5 +1,4 @@
-import {signIn} from 'next-auth/client'
-import {useSession} from 'next-auth/client'
+import {signIn, useSession} from 'next-auth/client'
 import {Avatar} from './avatar'
 
 /*

@@ -1,8 +1,8 @@
-import {Avatar} from '../avatar'
-import Link from 'next/link'
-import {cssVars} from '../../const'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
+import Link from 'next/link'
+import {cssVars} from '../../const'
+import {Avatar} from '../avatar'
 
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')

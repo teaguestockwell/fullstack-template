@@ -1,11 +1,10 @@
 import Document, {
-  Html,
+  DocumentContext,
   Head,
+  Html,
   Main,
   NextScript,
-  DocumentContext,
 } from 'next/document'
-
 import {description} from '../const'
 
 class MyDocument extends Document {

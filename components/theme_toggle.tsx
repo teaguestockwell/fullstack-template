@@ -1,6 +1,6 @@
-import {useTheme} from 'next-themes'
 import Dark from '@material-ui/icons/Brightness4'
 import Light from '@material-ui/icons/Brightness7'
+import {useTheme} from 'next-themes'
 import {cssVars} from '../const'
 
 export const ThemeToggle = ({size = 36}: {size?: number}) => {

@@ -1,6 +1,6 @@
+import {render, screen} from '@testing-library/react'
 import {FeedbackRate} from '../../../components/feedback/feedback_rate'
 import {feedback} from '../../../hooks/use_feedback'
-import {render, screen} from '@testing-library/react'
 
 it('renders', () => {
   expect(feedback.useStore.getState().rating).toBe(undefined)

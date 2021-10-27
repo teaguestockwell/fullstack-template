@@ -1,11 +1,11 @@
-import type {AppProps} from 'next/app'
-import {Providers} from '../components/providers'
-import {domain, title, description} from '../const'
 import {DefaultSeo} from 'next-seo'
-import {WithClientAuth} from '../hooks/with_client_auth'
+import type {AppProps} from 'next/app'
 import Head from 'next/head'
-import '../styles/global_styles.css'
+import {Providers} from '../components/providers'
+import {description, domain, title} from '../const'
+import {WithClientAuth} from '../hooks/with_client_auth'
 import {WithTopNav} from '../hooks/with_top_nav'
+import '../styles/global_styles.css'
 
 interface PageProps {
   Component: {

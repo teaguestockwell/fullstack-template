@@ -1,7 +1,7 @@
-import queryString from 'query-string'
 import axios from 'axios'
-import create from 'zustand'
+import queryString from 'query-string'
 import {useInfiniteQuery} from 'react-query'
+import create from 'zustand'
 import {combine} from 'zustand/middleware'
 
 const useStore = create(
