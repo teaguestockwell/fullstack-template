@@ -1,6 +1,6 @@
 import {TopNav} from '../../../components/nav/top_nav'
-import {renderWrapped, screen} from '../../utils/setup/render_wrapped'
 import {title} from '../../../const'
+import {renderWrapped, screen} from '../../utils/setup/render_wrapped'
 
 it('renders', () => {
   renderWrapped(<TopNav />)

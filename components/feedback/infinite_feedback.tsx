@@ -1,11 +1,11 @@
-import {Cell} from './cell'
-import {useInfiniteFeedbacks, store} from '../../hooks/use_infinite_feedbacks'
-import {Content} from '../../components/content'
-import {LoadingText} from '../loading_text'
-import {EmojiRate} from './emoji_rate'
-import {cssVars} from '../../const'
 import Lazy from 'react-lazyload'
+import {Content} from '../../components/content'
+import {cssVars} from '../../const'
 import {UseFetchMore} from '../../hooks/use_fetch_more'
+import {store, useInfiniteFeedbacks} from '../../hooks/use_infinite_feedbacks'
+import {LoadingText} from '../loading_text'
+import {Cell} from './cell'
+import {EmojiRate} from './emoji_rate'
 
 export const InfiniteFeedback = () => {
   const rating = store((s) => s.rating)

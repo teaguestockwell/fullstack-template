@@ -1,5 +1,5 @@
-import {renderWrapped, screen} from '../utils/setup/render_wrapped'
 import {ThemeToggle} from '../../components/theme_toggle'
+import {renderWrapped, screen} from '../utils/setup/render_wrapped'
 
 it('renders', () => {
   renderWrapped(<ThemeToggle />)

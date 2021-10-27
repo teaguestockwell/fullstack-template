@@ -1,8 +1,8 @@
+import {Provider as NextAuthProvider} from 'next-auth/client'
 import {ThemeProvider} from 'next-themes'
 import React from 'react'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
-import {Provider as NextAuthProvider} from 'next-auth/client'
 
 export const Providers = ({
   children,

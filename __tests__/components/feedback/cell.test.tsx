@@ -1,5 +1,5 @@
+import {render, screen} from '@testing-library/react'
 import {Cell} from '../../../components/feedback/cell'
-import {screen, render} from '@testing-library/react'
 
 const mockFeedback: Types.Feedback.WithUser = {
   id: '1',

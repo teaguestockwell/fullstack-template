@@ -1,4 +1,4 @@
-import {usingMiddleware, ApiError} from '../../middleware/using_middleware'
+import {ApiError, usingMiddleware} from '../../middleware/using_middleware'
 
 it('catches server errors', async () => {
   let status

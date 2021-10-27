@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import Link from 'next/link'
 import AccountCircle from '@material-ui/icons/AccountCircle'
+import Link from 'next/link'
 import {cssVars} from '../const'
 
 export const Avatar = ({

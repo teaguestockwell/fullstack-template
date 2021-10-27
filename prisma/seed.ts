@@ -1,6 +1,6 @@
 import {PrismaClient} from '@prisma/client'
-import faker from 'faker'
 import cuid from 'cuid'
+import faker from 'faker'
 
 const client = new PrismaClient()
 

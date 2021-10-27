@@ -11,7 +11,7 @@ describe('Feedback', () => {
     })
   })
 
-  it('400 for invalid query params', () => {
+  it('400 for invalid query params 0', () => {
     cy.request({
       method: 'GET',
       url: ep + '?rating=-1',
@@ -21,7 +21,7 @@ describe('Feedback', () => {
     })
   })
 
-  it('400 for invalid query params', () => {
+  it('400 for invalid query params 1', () => {
     cy.request({
       method: 'GET',
       url: ep + '?rating=10',
@@ -31,7 +31,7 @@ describe('Feedback', () => {
     })
   })
 
-  it('400 for invalid query params', () => {
+  it('400 for invalid query params 2', () => {
     cy.request({
       method: 'GET',
       url: ep + '?rating=10',

@@ -1,9 +1,9 @@
-import {useMutation} from 'react-query'
 import axios from 'axios'
+import {useRouter} from 'next/dist/client/router'
+import React from 'react'
+import {useMutation} from 'react-query'
 import create from 'zustand'
 import {combine} from 'zustand/middleware'
-import React from 'react'
-import {useRouter} from 'next/dist/client/router'
 
 interface State {
   comment: string

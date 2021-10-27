@@ -1,6 +1,6 @@
-import {renderWrapped, screen} from '../setup/render_wrapped'
-import {useQuery} from 'react-query'
 import axios from 'axios'
+import {useQuery} from 'react-query'
+import {renderWrapped, screen} from '../setup/render_wrapped'
 
 const getHealth = async () => {
   const res = (await axios.get('/api/health')) as any

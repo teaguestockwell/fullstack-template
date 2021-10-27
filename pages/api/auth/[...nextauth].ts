@@ -1,7 +1,7 @@
-import {signInCallback} from '../../../services/user/sign_in'
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
 import {getToken} from 'next-auth/jwt'
+import Providers from 'next-auth/providers'
+import {signInCallback} from '../../../services/user/sign_in'
 
 const JWT = {
   secret: process.env.SECRET,

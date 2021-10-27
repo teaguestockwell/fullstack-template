@@ -1,5 +1,5 @@
-import {renderWrapped, screen} from '../../utils/setup/render_wrapped'
 import {FeedbackPage} from '../../../components/feedback/feedback_page'
+import {renderWrapped, screen} from '../../utils/setup/render_wrapped'
 
 const feedback: Types.Prisma.Feedback = {
   id: '1',

@@ -1,9 +1,9 @@
+import {signOut} from 'next-auth/client'
+import Image from 'next/image'
 import Link from 'next/link'
 import {cssVars, title} from '../../const'
-import Image from 'next/image'
-import {UserAccountAvatar} from '../user_account_avatar'
-import {signOut} from 'next-auth/client'
 import {ThemeToggle} from '../theme_toggle'
+import {UserAccountAvatar} from '../user_account_avatar'
 
 export const TopNav = () => {
   const pad = 16
