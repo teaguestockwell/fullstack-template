@@ -34,11 +34,10 @@
     <li><a href="#api">API</a></li>
     <li><a href="#ui">UI</a></li>
     <li><a href="#limitations">Limitations</a></li>
-    <li><a href="#implementation">Implementation</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#testing">Testing</a></li>
-    <li><a href="#getting-started">Testing</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#deployment">Deployment</a></li>
     <li><a href="#how-to-run">How to run</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -60,7 +59,7 @@ A web app for submitting and reviewing feedback. This project was boot strapped 
 
 ## Features
 
-- Static, Server Side, and Client side rendering with Next.js. Static pages /feedback can server by a CDN for lightning fast initial loads and server side rendered pages like: /feedback/[gameSessionId]/edit remove a loading state from the client for a better user experience.
+- Static, Server Side, and Client side rendering with Next.js. / is statically rendered during build time and can be server by a CDN for lightning fast initial loads. /feedback is client side rendered with server state using react query, and /feedback/[gameSessionId]/edit is rendered on the server to remove a loading state from the client for a better user experience.
 
 - Users may submit a 1-5 rating with an emoji plus a comment for each session. Multiple players can submit feedback for the same session, but a single player may only submit one feedback per session.
 
@@ -264,12 +263,6 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 - Meta tags / Open Graph generated using [next-auth](https://github.com/garmeeh/next-seo)
 - Favorite icons generated with [RealFaviconGenerator](https://realfavicongenerator.net)
-
-### Testing
-
-- Unit tests [jest](https://jestjs.io/docs/getting-started)
-- Component tests [testing-library](https://testing-library.com/docs/)
-- E2E tests [cypress](https://docs.cypress.io/API/table-of-contents)
 
 ## Getting Started
 
