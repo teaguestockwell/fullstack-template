@@ -4,7 +4,7 @@ export const Content = ({
   children,
   style = {},
 }: {
-  children: JSX.Element[] | JSX.Element
+  children: React.ReactNode
   style?: any
 }) => {
   return (

@@ -5,7 +5,7 @@ const emojis = ['😭', '😕', '😐', '😊', '😍']
 /**
  * @param store a zustand store that has a rating property
  */
-export const EmojiRate = ({
+export const FeedbackRate = ({
   store,
   cb = (_rating: number) => {},
 }: {

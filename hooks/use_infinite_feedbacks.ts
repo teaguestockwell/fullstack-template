@@ -4,7 +4,7 @@ import {useInfiniteQuery} from 'react-query'
 import create from 'zustand'
 import {combine} from 'zustand/middleware'
 
-export const store = create(
+const useStore = create(
   combine(
     {
       rating: undefined,
@@ -13,22 +13,23 @@ export const store = create(
   )
 )
 
-export const getFeedback = async (cursor: string) => {
-  const {rating} = store.getState()
+const getFeedback = async (cursor: string) => {
+  const {rating} = useStore.getState()
 
-  let query = queryString.stringify({
+  const params = queryString.stringify({
     cursor,
     rating,
   })
 
-  query = query ? `?${query}` : ''
+  const {data} = await axios({
+    method: 'get',
+    url: `/api/v1/feedback${params ? '?' : ''}${params}`,
+  })
 
-  const res = await axios.get(`/api/v1/feedback${query}`)
-
-  return res.data as Types.Feedback.WithUser[]
+  return data as Types.Feedback.WithUser[]
 }
 
-export const useInfiniteFeedbacks = (rating?: number) => {
+const useInfiniteFeedbacks = (rating?: number) => {
   return useInfiniteQuery(
     ['infinite-feedbacks', `rating-${rating}`],
     ({pageParam = undefined}) => getFeedback(pageParam),
@@ -38,4 +39,9 @@ export const useInfiniteFeedbacks = (rating?: number) => {
       },
     }
   )
+}
+
+export const infiniteFeedback = {
+  useInfiniteFeedbacks,
+  useStore,
 }

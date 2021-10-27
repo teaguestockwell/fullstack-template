@@ -60,7 +60,7 @@ export const TopNav = () => {
               alt={title}
             />
 
-            <div
+            <h1
               css={{
                 fontWeight: 600,
                 marginLeft: pad / 2,
@@ -77,7 +77,7 @@ export const TopNav = () => {
               }}
             >
               {title}
-            </div>
+            </h1>
           </button>
         </Link>
       </div>

@@ -1,7 +1,7 @@
-import {InfiniteFeedback} from '../../components/feedback/infinite_feedback'
+import {InfiniteFeedbackList} from '../../components/feedback/infinite_feedback_list'
 
 const Page = () => {
-  return <InfiniteFeedback />
+  return <InfiniteFeedbackList />
 }
 
 export default Page

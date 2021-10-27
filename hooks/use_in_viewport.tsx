@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UseFetchMore = ({fetchMore}: {fetchMore: () => void}) => {
+export const UseInViewport = ({cb}: {cb: (isInViewPort: boolean) => void}) => {
   const ref = React.useRef(null) as any
 
   React.useEffect(() => {
@@ -14,9 +14,7 @@ export const UseFetchMore = ({fetchMore}: {fetchMore: () => void}) => {
     }
 
     const shouldFetchMore: IntersectionObserverCallback = (entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        fetchMore()
-      }
+      cb(entries.some((e) => e.isIntersecting))
     }
 
     const observer = new IntersectionObserver(shouldFetchMore, options)
@@ -26,10 +24,9 @@ export const UseFetchMore = ({fetchMore}: {fetchMore: () => void}) => {
     }
 
     return () => {
-      // disconnect is better then unobserve in this case because there is a chance of passing a null element to the unobserve
       observer.disconnect()
     }
-  }, [fetchMore])
+  }, [cb])
 
   return <div data-testid="use-fetch-more" ref={ref}></div>
 }

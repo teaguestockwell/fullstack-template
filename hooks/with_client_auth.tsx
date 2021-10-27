@@ -1,5 +1,6 @@
 import {signIn, useSession} from 'next-auth/client'
 import {useEffect} from 'react'
+import {LoadingText} from '../components/loading_text'
 
 // https://github.com/nextauthjs/next-auth/issues/1210#issuecomment-782630909
 
@@ -22,16 +23,7 @@ const Effect = ({children}: {children: any}) => {
   }
 
   // the session is being fetched
-  return (
-    <div
-      style={{
-        textAlign: 'center',
-        paddingTop: 20,
-      }}
-    >
-      Logging in...
-    </div>
-  )
+  return <LoadingText text="Please wait one moment while we log you in." />
 }
 
 export const WithClientAuth = ({

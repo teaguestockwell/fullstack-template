@@ -1,34 +1,21 @@
 import React from 'react'
 import {cssVars} from '../../const'
-import {useFeedback} from '../../hooks/use_feedback'
+import {feedback} from '../../hooks/use_feedback'
 
-export const Save = () => {
-  const canSave = useFeedback.useIsValid()
-  const useMutation = useFeedback.useFeedbackMutation()
+export const SaveFeedbackButton = () => {
+  const isValid = feedback.useIsValid()
+  const useMutation = feedback.usePutMutation()
   const [isSuccess, setIsSuccess] = React.useState(false)
 
   React.useEffect(() => {
-    if (useMutation.isSuccess) {
-      setIsSuccess(true)
-
-      setTimeout(() => {
-        setIsSuccess(false)
-      }, 5000)
-    } else {
+    setIsSuccess(useMutation.isSuccess)
+    setTimeout(() => {
       setIsSuccess(false)
-    }
+    }, 5000)
   }, [useMutation.isSuccess])
 
-  const onClick = () => {
-    if (!canSave) return
-
-    if (useMutation.isLoading) return
-
-    useMutation.mutate()
-  }
-
   const cursor = (() => {
-    if (!canSave) {
+    if (!isValid) {
       return 'not-allowed'
     }
 
@@ -49,7 +36,9 @@ export const Save = () => {
     return 'Save'
   })()
 
-  const css = canSave
+  const onClick = () => (cursor === 'pointer' ? useMutation.mutate() : null)
+
+  const css = isValid
     ? {
         '&:hover, &:focus': {
           backgroundColor: cssVars.color.bg[0],
