@@ -21,7 +21,7 @@ const Route = async (
     const gameSessionId = req.query.gameSessionId as string
 
     // create or update my feedback at this gameSession
-    //verify user is logged in
+    // verify user is logged in
     const jwt = await usingJWT(req)
 
     // verify req body is valid
