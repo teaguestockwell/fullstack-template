@@ -12,7 +12,7 @@ export const getServerSideProps: Types.Next.GetServerSideProps = async (
   if (!jwt?.sub) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: 'api/auth/signin',
         permanent: false,
       },
     }
