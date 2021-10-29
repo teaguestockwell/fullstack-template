@@ -1,6 +1,6 @@
-import {FeedbackPage} from '../../../components/feedback/feedback_page'
-import {client} from '../../../prisma/client'
-import {getValidatedToken} from '../../api/auth/[...nextauth]'
+import {FeedbackPage} from '../../components/feedback/feedback_page'
+import {client} from '../../prisma/client'
+import {getValidatedToken} from '../api/auth/[...nextauth]'
 
 export const getServerSideProps: Types.Next.GetServerSideProps = async (
   context
@@ -26,12 +26,6 @@ export const getServerSideProps: Types.Next.GetServerSideProps = async (
       },
     },
   })
-
-  if (!feedback) {
-    return {
-      notFound: true,
-    }
-  }
 
   // valid, server side render the feedback page
   return {

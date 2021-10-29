@@ -10,7 +10,7 @@ export const FeedbackPage = ({
 }: {
   initialData: Types.Prisma.Feedback | null
 }) => {
-  feedback.useInit({initialData})
+  feedback.useInit(initialData)
 
   return (
     <Content

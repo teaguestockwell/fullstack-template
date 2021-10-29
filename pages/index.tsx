@@ -25,7 +25,7 @@ const Page = () => {
         <button css={buttonCss}>View Feedback</button>
       </Link>
 
-      <Link href="/feedback/1/new" passHref>
+      <Link href="/feedback/1" passHref>
         <button css={buttonCss}>Create or Update Your feedback</button>
       </Link>
     </Content>

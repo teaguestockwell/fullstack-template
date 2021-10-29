@@ -55,8 +55,6 @@ Mobile Lighthouse: / (statically rendered)
 <img src="https://user-images.githubusercontent.com/71202372/139150316-9537247a-edb4-4dac-bb94-5e25a2d2b22a.png" ></a>
 Mobile Lighthouse: /feedback (client side rendered)
 <img src="https://user-images.githubusercontent.com/71202372/139150537-a6cf202b-da1c-4420-8c49-a0a2c4368c1c.png"></a>
-Mobile Lighthouse: /feedback/[gameSessionId]/new (server side rendered)
-<img src="https://user-images.githubusercontent.com/71202372/139150543-7c5c5415-602d-4618-b965-eedcb4be898b.png"></a>
 
 <img src="https://user-images.githubusercontent.com/71202372/138722325-7a09c4aa-2c16-4cdb-8c11-4f3b4a31466e.gif" width="500vh"></a>
 <img src="https://user-images.githubusercontent.com/71202372/138721971-022aab5e-d96b-452d-9823-ed4d05c0be8a.png" width="500vh"></a>
