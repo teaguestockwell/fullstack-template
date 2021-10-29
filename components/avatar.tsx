@@ -49,6 +49,7 @@ export const Avatar = ({
   return (
     <Link href={href ?? ''} passHref>
       <button
+        aria-label="sign in or out"
         css={{height: size, width: size, borderRadius: 100, ...hover, ...style}}
       >
         {props2.src ? (

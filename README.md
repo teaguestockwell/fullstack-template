@@ -26,10 +26,14 @@
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#api">API</a></li>
+    <li><a href="#ui">UI</a></li>
+    <li><a href="#limitations">Limitations</a></li>
     <li><a href="#system-architecture">System Architecture</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#testing">Testing</a></li>
-    <li><a href="#getting-started">Testing</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#deployment">Deployment</a></li>
     <li><a href="#how-to-run">How to run</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -43,7 +47,16 @@
 
 This is an opinionated starting point for common patterns and tools I have used building jam stack sites with Postgres, Next.js, React, and Node.js.
 
-### Serverless Connection Pooling
+Mobile Lighthouse: / (statically rendered)
+<img src="https://user-images.githubusercontent.com/71202372/139150316-9537247a-edb4-4dac-bb94-5e25a2d2b22a.png" ></a>
+Mobile Lighthouse: /feedback (client side rendered)
+<img src="https://user-images.githubusercontent.com/71202372/139150537-a6cf202b-da1c-4420-8c49-a0a2c4368c1c.png"></a>
+
+<img src="https://user-images.githubusercontent.com/71202372/138722325-7a09c4aa-2c16-4cdb-8c11-4f3b4a31466e.gif" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721971-022aab5e-d96b-452d-9823-ed4d05c0be8a.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721968-07d18429-ea5c-4337-bf7f-fc9c4ac4231f.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721964-edc6e24b-81f4-43eb-a903-a08b8f13f3ee.png" width="500vh"></a>
+<img src="https://user-images.githubusercontent.com/71202372/138721956-adc4c1db-7346-4b0e-b370-0bc835b95efa.png" width="500vh"></a>
 
 Initially I used AWS RDS, but the serverless functions quickly exhausted all the connections to my small RDS instance. One possible solution was to use AWS RDS Proxy to pool connections on Postgres. Unfortunately, because of the way AWS RDS Proxy pins connections it couldn't be used with [Prisma](https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms). Instead of hosting a custom PgBouncer on an EC2 instance, I switched to Digital Ocean because they offered a managed PostgreSQL RDS service with PgBouncer pre configured.
 
@@ -113,12 +126,6 @@ Next Auth and Google OAuth are used to authenticate users. From there the API ca
 
 - Meta tags / Open Graph generated using [next-auth](https://github.com/garmeeh/next-seo)
 - Favorite icons generated with [RealFaviconGenerator](https://realfavicongenerator.net)
-
-### Testing
-
-- Unit tests [jest](https://jestjs.io/docs/getting-started)
-- Component tests [testing-library](https://testing-library.com/docs/)
-- E2E tests [cypress](https://docs.cypress.io/API/table-of-contents)
 
 ## Getting Started
 

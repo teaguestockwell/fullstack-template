@@ -1,4 +1,3 @@
-'use strict'
 import {act} from 'react-dom/test-utils'
 import actualCreate from 'zustand'
 

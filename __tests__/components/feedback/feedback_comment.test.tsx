@@ -1,6 +1,6 @@
+import {fireEvent, render, screen} from '@testing-library/react'
 import {FeedbackComment} from '../../../components/feedback/feedback_comment'
 import {feedback} from '../../../hooks/use_feedback'
-import {render, screen, fireEvent} from '@testing-library/react'
 
 it('renders', () => {
   const comment = feedback.useStore.getState().comment

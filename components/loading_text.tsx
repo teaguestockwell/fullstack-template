@@ -10,7 +10,8 @@ export const LoadingText = ({
   return (
     <h1
       style={{
-        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
         fontSize: 18,
         color: cssVars.color.font[1],
         paddingTop: 20,
