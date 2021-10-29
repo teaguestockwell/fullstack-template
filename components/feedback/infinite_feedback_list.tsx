@@ -1,15 +1,17 @@
 import Lazy from 'react-lazyload'
 import {cssVars} from '../../const'
-import {infiniteFeedback} from '../../hooks/use_infinite_feedbacks'
+import {
+  useFilteredInfiniteFeedbackQueryParams,
+  useFilteredInfiniteFeedbacksQuery,
+} from '../../hooks/use_infinite_feedbacks'
 import {UseInViewport} from '../../hooks/use_in_viewport'
 import {Content} from '../content'
 import {LoadingText} from '../loading_text'
 import {FeedbackRate} from './feedback_rate'
 import {InfiniteFeedbackItem} from './infinite_feedback_item'
 
-export const InfiniteFeedbackList = () => {
-  const rating = infiniteFeedback.useStore((s) => s.rating)
-  const q = infiniteFeedback.useInfiniteFeedbacks(rating)
+const ContentList = () => {
+  const q = useFilteredInfiniteFeedbacksQuery()
 
   if (!q.data) {
     return (
@@ -25,27 +27,15 @@ export const InfiniteFeedbackList = () => {
 
   return (
     <Content style={{paddingBottom: 100, paddingLeft: 10, paddingRight: 10}}>
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: cssVars.color.nav,
-          ...cssVars.shadow,
-        }}
-      >
-        <FeedbackRate store={infiniteFeedback.useStore} />
-      </div>
-
-      {/* load page data */}
-      {q.data.pages.map((page, pageI) => (
-        <Lazy key={pageI} unmountIfInvisible offset={300}>
-          {page.map((feedback) => (
-            <InfiniteFeedbackItem key={feedback.id} feedback={feedback} />
-          ))}
-        </Lazy>
-      ))}
+      {q.data.pages.map((page) =>
+        page.map((feedback) => {
+          return (
+            <Lazy key={feedback.id} unmountIfInvisible offset={1000}>
+              <InfiniteFeedbackItem feedback={feedback} />
+            </Lazy>
+          )
+        })
+      )}
 
       <UseInViewport cb={(inView) => (inView ? q.fetchNextPage() : null)} />
 
@@ -57,5 +47,25 @@ export const InfiniteFeedbackList = () => {
         <LoadingText text="Congrats! You made it through all the feedback." />
       )}
     </Content>
+  )
+}
+
+export const InfiniteFeedbackList = () => {
+  return (
+    <>
+      <ContentList />
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: cssVars.color.nav,
+          ...cssVars.shadow,
+        }}
+      >
+        <FeedbackRate store={useFilteredInfiniteFeedbackQueryParams} />
+      </div>
+    </>
   )
 }
