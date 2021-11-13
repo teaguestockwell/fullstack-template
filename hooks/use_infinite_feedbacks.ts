@@ -1,14 +1,18 @@
 import axios from 'axios'
-import queryString from 'query-string'
 import {useInfiniteQuery} from 'react-query'
 import create from 'zustand'
 import {combine} from 'zustand/middleware'
 import {useShowScrollbar} from './use_show_scrollbar'
 
 const getFeedback = async (cursor: string, qs: string) => {
+  const params = new URLSearchParams(qs)
+  if (cursor) params.set('cursor', cursor)
+
+  const q = params.toString()
+
   const {data} = await axios({
     method: 'get',
-    url: `/api/v1/feedback?${qs}&cursor=${cursor}`,
+    url: `/api/v1/feedback${q ? '?' + q : ''}`,
   })
 
   return data as Types.Feedback.WithUser[]
@@ -38,9 +42,10 @@ export const useFilteredInfiniteFeedbackQueryParams = create(
 const useQueryString = () => {
   const state = useFilteredInfiniteFeedbackQueryParams()
 
-  const params = queryString.stringify(state)
+  const params = new URLSearchParams()
+  if (state.rating) params.set('rating', state.rating)
 
-  return params
+  return params.toString()
 }
 
 export const useFilteredInfiniteFeedbacksQuery = () => {
