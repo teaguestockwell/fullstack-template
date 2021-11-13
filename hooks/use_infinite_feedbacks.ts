@@ -43,7 +43,7 @@ const useQueryString = () => {
   const state = useFilteredInfiniteFeedbackQueryParams()
 
   const params = new URLSearchParams()
-  if (state.rating) params.set('rating', state.rating)
+  if (state.rating !== undefined) params.set('rating', state.rating)
 
   return params.toString()
 }
