@@ -1,5 +1,6 @@
 @import './mui_icons.css';
 @import './vars.css';
+@import './nprogress.css';
 
 html {
   -webkit-font-smoothing: antialiased;

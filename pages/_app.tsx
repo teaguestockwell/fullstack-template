@@ -1,11 +1,17 @@
 import {DefaultSeo} from 'next-seo'
 import type {AppProps} from 'next/app'
 import Head from 'next/head'
+import Router from 'next/router'
+import NProgress from 'nprogress'
 import {Providers} from '../components/providers'
 import {description, domain, title} from '../const'
 import {WithClientAuth} from '../hooks/with_client_auth'
 import {WithTopNav} from '../hooks/with_top_nav'
 import '../styles/global_styles.css'
+
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 interface PageProps {
   Component: {
